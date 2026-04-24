@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Contoh Buku TKA</title>
+  <desc id="desc">Ilustrasi contoh buku jurusan TKA</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dcfce7"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+    <linearGradient id="coverA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#166534"/>
+    </linearGradient>
+    <linearGradient id="coverB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#075985"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <circle cx="1030" cy="620" r="140" fill="#bfdbfe" opacity="0.5"/>
+  <circle cx="170" cy="150" r="120" fill="#bbf7d0" opacity="0.6"/>
+
+  <g transform="translate(210,190)">
+    <g transform="rotate(-7 240 260)">
+      <rect x="0" y="0" width="420" height="530" rx="18" fill="url(#coverA)"/>
+      <rect x="18" y="18" width="384" height="494" rx="14" fill="#f8fafc" opacity="0.12"/>
+      <text x="48" y="120" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="700" fill="#ffffff">Modul TKA</text>
+      <text x="48" y="170" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#dcfce7">Dasar Kejuruan</text>
+      <rect x="48" y="225" width="312" height="8" rx="4" fill="#bbf7d0"/>
+      <rect x="48" y="260" width="280" height="8" rx="4" fill="#bbf7d0"/>
+      <rect x="48" y="295" width="260" height="8" rx="4" fill="#bbf7d0"/>
+    </g>
+
+    <g transform="translate(330,40) rotate(8 240 260)">
+      <rect x="0" y="0" width="420" height="530" rx="18" fill="url(#coverB)"/>
+      <rect x="18" y="18" width="384" height="494" rx="14" fill="#f8fafc" opacity="0.14"/>
+      <text x="48" y="120" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="700" fill="#ffffff">Workbook TKA</text>
+      <text x="48" y="170" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#dbeafe">Latihan Praktik</text>
+      <rect x="48" y="225" width="312" height="8" rx="4" fill="#bae6fd"/>
+      <rect x="48" y="260" width="280" height="8" rx="4" fill="#bae6fd"/>
+      <rect x="48" y="295" width="260" height="8" rx="4" fill="#bae6fd"/>
+    </g>
+  </g>
+
+  <rect x="70" y="62" width="450" height="120" rx="16" fill="#ffffff" opacity="0.9"/>
+  <text x="110" y="117" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700" fill="#0f172a">Contoh Buku TKA</text>
+  <text x="110" y="160" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#334155">Paket materi teori dan praktik jurusan TKA</text>
+</svg>
