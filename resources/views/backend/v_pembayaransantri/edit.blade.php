@@ -1,10 +1,22 @@
 @extends('backend.v_layout.app')
 @section('content')
+@php
+    $metodePembayaran = [
+        'Transfer Bank BCA',
+        'Transfer Bank BRI',
+        'Transfer Bank BNI',
+        'Transfer Bank Mandiri',
+        'E-Wallet DANA',
+        'E-Wallet GoPay',
+        'E-Wallet OVO',
+        'E-Wallet ShopeePay',
+    ];
+@endphp
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <form action="{{ route('backend.pembayaransantri.update', $edit->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('backend.pembayaransantri.update', $edit->id_pembayaran) }}" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
                     <div class="card-body">
@@ -29,12 +41,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="idpendaftaran">Id Pendaftaran</label>
-                                    <input type="text" id="idpendaftaran" name="id_pendaftaran"
-                                        value="{{ old('id_pendaftaran', $edit->id_pendaftaran) }}"
-                                        class="form-control @error('id_pendaftaran') is-invalid @enderror"
-                                        placeholder="Masukkan Id Pendaftaran">
-                                    @error('id_pendaftaran')
+                                    <label for="idsantri">Id Siswa</label>
+                                    <input type="text" id="idsantri" name="id_santri"
+                                        value="{{ old('id_santri', $edit->id_santri) }}"
+                                        class="form-control @error('id_santri') is-invalid @enderror"
+                                        placeholder="Masukkan Id Siswa">
+                                    @error('id_santri')
                                     <span class="invalid-feedback alert-danger" role="alert">
                                         {{ $message }}
                                     </span>
@@ -94,10 +106,13 @@
 
                                 <div class="form-group">
                                     <label for="namabank">Nama Bank</label>
-                                    <input type="text" id="namabank" name="nama_bank"
-                                        value="{{ old('nama_bank', $edit->nama_bank) }}"
-                                        class="form-control @error('nama_bank') is-invalid @enderror"
-                                        placeholder="Masukkan Nama Bank">
+                                    <select id="namabank" name="nama_bank"
+                                        class="form-control @error('nama_bank') is-invalid @enderror">
+                                        <option value="" disabled>Pilih metode pembayaran</option>
+                                        @foreach ($metodePembayaran as $metode)
+                                            <option value="{{ $metode }}" {{ old('nama_bank', $edit->nama_bank) === $metode ? 'selected' : '' }}>{{ $metode }}</option>
+                                        @endforeach
+                                    </select>
                                     @error('nama_bank')
                                     <span class="invalid-feedback alert-danger" role="alert">
                                         {{ $message }}

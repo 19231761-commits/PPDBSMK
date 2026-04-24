@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PendaftaranSantriController;
 use App\Http\Controllers\PembayaransantriController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\PemesananBajuController;
 use App\Models\PendaftaranSantri;
 
 Route::get('/', function () {
@@ -42,9 +43,12 @@ Route::get('backend/pendaftaran-saya', [PendaftaranSantriController::class, 'cre
     ->name('backend.pendaftaran.form')
     ->middleware('auth');
 
-Route::view('backend/form-pemesanan-baju', 'backend.v_pemesanan_baju.index', [
-    'judul' => 'Form Pemesanan Baju',
-])->name('backend.pemesanan.baju')->middleware('auth');
+Route::get('backend/form-pemesanan-baju', [PemesananBajuController::class, 'create'])
+    ->name('backend.pemesanan.baju')
+    ->middleware('auth');
+Route::post('backend/form-pemesanan-baju', [PemesananBajuController::class, 'store'])
+    ->name('backend.pemesanan.baju.store')
+    ->middleware('auth');
 
 Route::view('backend/form-pemesanan-buku', 'backend.v_pemesanan_buku.index', [
     'judul' => 'Form Pemesanan Buku',
@@ -70,6 +74,10 @@ Route::get('/pendaftaran-siswa/export/excel', [PendaftaranSantriController::clas
 Route::get('/pendaftaran-siswa/export/pdf', [PendaftaranSantriController::class, 'exportPDF'])->name('backend.pendaftaransantri.export.pdf');
 
 // Route untuk Data Pembayaran Siswa
+Route::post('backend/pembayaransantri/{id}/bayar', [PembayaransantriController::class, 'bayar'])
+    ->name('backend.pembayaransantri.bayar')
+    ->middleware('auth');
+
 Route::resource('backend/pembayaransantri', PembayaransantriController::class, ['as' => 'backend'])
     ->middleware('auth');
 

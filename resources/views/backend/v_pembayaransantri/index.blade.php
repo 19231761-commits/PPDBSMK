@@ -37,6 +37,7 @@
                                     <th>Atas Nama</th>
                                     <th>Nama Bank</th>
                                     <th>Jumlah Pembayaran</th>
+                                    <th>Status</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -52,11 +53,26 @@
                                         <td>{{ $row->atas_nama }}</td>
                                         <td>{{ $row->nama_bank }}</td>
                                         <td>Rp {{ number_format($row->jumlah_pembayaran, 0, ',', '.') }}</td>
+                                        <td>
+                                            @if (($row->status_pembayaran ?? 'Belum Lunas') === 'Lunas')
+                                                <span class="badge badge-success">Lunas</span>
+                                            @else
+                                                <span class="badge badge-warning text-dark">Belum Lunas</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">
-                                            <a href="{{ route('backend.pembayaransantri.edit', $row->id_santri) }}" class="btn btn-sm btn-purple mb-1" title="Ubah Data">
+                                            @if (($row->status_pembayaran ?? 'Belum Lunas') !== 'Lunas')
+                                                <form method="POST" action="{{ route('backend.pembayaransantri.bayar', $row->id_pembayaran) }}" class="d-inline-block mr-1">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-success mb-1" title="Tandai Lunas">
+                                                        <i class="fas fa-check-circle"></i> Bayar Sekarang
+                                                    </button>
+                                                </form>
+                                            @endif
+                                            <a href="{{ route('backend.pembayaransantri.edit', $row->id_pembayaran) }}" class="btn btn-sm btn-purple mb-1" title="Ubah Data">
                                                 <i class="far fa-edit"></i> Ubah
                                             </a>
-                                            <form method="POST" action="{{ route('backend.pembayaransantri.destroy', $row->id_santri) }}" class="d-inline-block">
+                                            <form method="POST" action="{{ route('backend.pembayaransantri.destroy', $row->id_pembayaran) }}" class="d-inline-block">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-danger show_confirm mb-1" data-konf-delete="{{ $row->nama_santri }}" title="Hapus Data">
@@ -67,7 +83,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="10" class="text-center text-muted py-4">Belum ada data pembayaran</td>
+                                        <td colspan="11" class="text-center text-muted py-4">Belum ada data pembayaran</td>
                                     </tr>
                                 @endforelse
                             </tbody>

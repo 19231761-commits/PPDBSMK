@@ -1,7 +1,49 @@
 @extends('backend.v_layout.app')
 
 @section('content')
+@php
+    $jurusans = $jurusans ?? [
+        'Farmasi Klinis & Komunitas',
+        'Asisten Keperawatan & Caregiver',
+        'Teknik Komputer & Jaringan',
+        'Teknik Sepeda Motor',
+        'Teknik Kendaraan Ringan',
+    ];
+
+    $hargaJurusan = [
+        'Farmasi Klinis & Komunitas' => 180000,
+        'Asisten Keperawatan & Caregiver' => 182000,
+        'Teknik Komputer & Jaringan' => 190000,
+        'Teknik Sepeda Motor' => 188000,
+        'Teknik Kendaraan Ringan' => 192000,
+    ];
+
+    $tambahanUkuran = [
+        'S' => 0,
+        'M' => 5000,
+        'L' => 10000,
+        'XL' => 15000,
+        'XXL' => 20000,
+    ];
+
+    $paymentMethods = $paymentMethods ?? [
+        'BCA' => ['label' => 'Transfer Bank BCA', 'account' => 'BCA 1234567890', 'holder' => 'Yayasan SMK Sehati'],
+        'BRI' => ['label' => 'Transfer Bank BRI', 'account' => 'BRI 9876543210', 'holder' => 'Yayasan SMK Sehati'],
+        'BNI' => ['label' => 'Transfer Bank BNI', 'account' => 'BNI 1122334455', 'holder' => 'Yayasan SMK Sehati'],
+        'MANDIRI' => ['label' => 'Transfer Bank Mandiri', 'account' => 'Mandiri 5566778899', 'holder' => 'Yayasan SMK Sehati'],
+        'DANA' => ['label' => 'E-Wallet DANA', 'account' => 'DANA 081234567890', 'holder' => 'PPDB SMK Sehati'],
+        'GOPAY' => ['label' => 'E-Wallet GoPay', 'account' => 'GoPay 081234567891', 'holder' => 'PPDB SMK Sehati'],
+        'OVO' => ['label' => 'E-Wallet OVO', 'account' => 'OVO 081234567892', 'holder' => 'PPDB SMK Sehati'],
+        'SHOPEEPAY' => ['label' => 'E-Wallet ShopeePay', 'account' => 'ShopeePay 081234567893', 'holder' => 'PPDB SMK Sehati'],
+    ];
+@endphp
 <style>
+    .order-page {
+        background: radial-gradient(circle at top right, #e0f2fe 0%, #f8fafc 42%, #ffffff 100%);
+        border-radius: 18px;
+        padding: 18px;
+    }
+
     .order-page .hero-note {
         letter-spacing: 0.06em;
         font-size: 12px;
@@ -23,17 +65,45 @@
         text-transform: uppercase;
     }
 
+    .order-page .major-pill {
+        border: 1px solid #bfdbfe;
+        color: #0f172a;
+        background: #f0f9ff;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        margin: 0 8px 8px 0;
+        display: inline-flex;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .order-page .major-pill:hover,
+    .order-page .major-pill.is-active {
+        background: linear-gradient(120deg, #0ea5e9, #0284c7);
+        color: #fff;
+        border-color: transparent;
+    }
+
     .order-page .product-preview {
         border: 1px solid #dbe6f2;
         border-radius: 18px;
         overflow: hidden;
         background: #fff;
         box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+    }
+
+    .order-page .product-preview:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
     }
 
     .order-page .product-preview img {
         width: 100%;
-        height: 260px;
+        height: 190px;
         object-fit: cover;
         background: linear-gradient(145deg, #e0f2fe, #f0fdf4);
     }
@@ -46,6 +116,63 @@
         font-size: 12px;
         color: #64748b;
         margin-top: 6px;
+    }
+
+    .order-page .card,
+    .order-page .card-body,
+    .order-page form,
+    .order-page .form-group,
+    .order-page .product-preview {
+        position: relative;
+        z-index: 2;
+    }
+
+    .order-page .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .order-page .price-box {
+        border: 1px solid #bfdbfe;
+        background: #f8fbff;
+        border-radius: 14px;
+        padding: 14px;
+    }
+
+    .order-page .price-line {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .order-page .price-total {
+        border-top: 1px dashed #cbd5e1;
+        margin-top: 8px;
+        padding-top: 8px;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .order-page .payment-box {
+        border: 1px solid #c7d2fe;
+        background: #f8faff;
+        border-radius: 14px;
+        padding: 14px;
+    }
+
+    .order-page .payment-detail {
+        font-size: 13px;
+        color: #334155;
+        margin-bottom: 4px;
+    }
+
+    @media (min-width: 768px) {
+        .order-page .preview-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
     }
 </style>
 
@@ -67,61 +194,128 @@
                 <div class="card content-card h-100">
                     <div class="card-header py-3 d-flex justify-content-between align-items-center">
                         <h5 class="card-title">Data Pemesanan Baju</h5>
-                        <span class="section-tag">Jurusan TKA</span>
+                        <span class="section-tag">5 Jurusan Aktif</span>
                     </div>
                     <div class="card-body">
-                        <form>
+                        @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Data belum bisa disimpan:</strong>
+                                <ul class="mb-0 pl-3 mt-1">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('backend.pemesanan.baju.store') }}">
+                            @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Nama Siswa</label>
-                                    <input type="text" class="form-control" placeholder="Nama siswa">
+                                    <input type="text" name="nama_siswa" class="form-control" placeholder="Nama siswa" value="{{ old('nama_siswa') }}" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Ukuran Baju</label>
-                                    <select class="custom-select form-control">
-                                        <option>Pilih ukuran</option>
-                                        <option>S</option>
-                                        <option>M</option>
-                                        <option>L</option>
-                                        <option>XL</option>
-                                        <option>XXL</option>
+                                    <label>Jurusan</label>
+                                    <select class="custom-select form-control" id="jurusan-select-baju" name="jurusan" required>
+                                        <option value="" disabled {{ old('jurusan') ? '' : 'selected' }}>Pilih jurusan</option>
+                                        @foreach ($jurusans as $jurusan)
+                                            <option value="{{ $jurusan }}" {{ old('jurusan') === $jurusan ? 'selected' : '' }}>{{ $jurusan }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
+                                    <label>Ukuran Baju</label>
+                                    <select class="custom-select form-control" id="ukuran-baju-select" name="ukuran_baju" required>
+                                        <option value="" disabled {{ old('ukuran_baju') ? '' : 'selected' }}>Pilih ukuran</option>
+                                        <option value="S" {{ old('ukuran_baju') === 'S' ? 'selected' : '' }}>S</option>
+                                        <option value="M" {{ old('ukuran_baju') === 'M' ? 'selected' : '' }}>M</option>
+                                        <option value="L" {{ old('ukuran_baju') === 'L' ? 'selected' : '' }}>L</option>
+                                        <option value="XL" {{ old('ukuran_baju') === 'XL' ? 'selected' : '' }}>XL</option>
+                                        <option value="XXL" {{ old('ukuran_baju') === 'XXL' ? 'selected' : '' }}>XXL</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
                                     <label>Jumlah Pesanan</label>
-                                    <input type="number" class="form-control" placeholder="Contoh: 1">
+                                    <input type="number" id="jumlah-pesanan-input" name="jumlah_pesanan" class="form-control" placeholder="Contoh: 1" value="{{ old('jumlah_pesanan') }}" min="1" max="10" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Warna / Keterangan</label>
-                                    <input type="text" class="form-control" placeholder="Contoh: Putih, lengan panjang">
+                                    <input type="text" name="warna_keterangan" class="form-control" placeholder="Contoh: Putih, lengan panjang" value="{{ old('warna_keterangan') }}">
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label>Metode Pembayaran</label>
+                                    <select class="custom-select form-control" id="metode-pembayaran-select" name="metode_pembayaran" required>
+                                        <option value="" disabled {{ old('metode_pembayaran') ? '' : 'selected' }}>Pilih metode pembayaran</option>
+                                        @foreach ($paymentMethods as $code => $method)
+                                            <option value="{{ $code }}" {{ old('metode_pembayaran') === $code ? 'selected' : '' }}>{{ $method['label'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="price-box mb-3">
+                                <h6 class="mb-2">Harga Contoh PDH</h6>
+                                @foreach ($hargaJurusan as $namaJurusan => $harga)
+                                    <div class="price-line">
+                                        <span>{{ $namaJurusan }}</span>
+                                        <span>Rp {{ number_format($harga, 0, ',', '.') }}</span>
+                                    </div>
+                                @endforeach
+                                <div class="price-line mt-2 mb-0">
+                                    <span>Tambahan ukuran S/M/L/XL/XXL</span>
+                                    <span>+0 / +5rb / +10rb / +15rb / +20rb</span>
+                                </div>
+                                <div class="price-total" id="estimasi-total-pdh">Estimasi Total PDH: Rp 0</div>
+                            </div>
+
+                            <div class="payment-box mb-3">
+                                <h6 class="mb-2">Tujuan Pembayaran</h6>
+                                <div class="payment-detail" id="payment-label">Metode: -</div>
+                                <div class="payment-detail" id="payment-account">Nomor Rekening / Nomor Wallet: -</div>
+                                <div class="payment-detail mb-0" id="payment-holder">Atas Nama: -</div>
                             </div>
 
                             <div class="form-group">
                                 <label>Catatan</label>
-                                <textarea class="form-control" rows="4" placeholder="Tulis catatan tambahan jika ada"></textarea>
+                                <textarea class="form-control" name="catatan" rows="4" placeholder="Tulis catatan tambahan jika ada">{{ old('catatan') }}</textarea>
                                 <div class="form-hint">Tips: isi model dan detail ukuran agar proses pemesanan lebih cepat.</div>
+                                <div class="form-hint">Harga contoh otomatis dihitung berdasarkan jurusan dan ukuran baju.</div>
+                            </div>
+
+                            <div class="mb-2">
+                                @foreach ($jurusans as $jurusan)
+                                    <button type="button" class="major-pill js-major-pill-baju" data-major="{{ $jurusan }}">{{ $jurusan }}</button>
+                                @endforeach
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary px-4">Simpan</button>
+                                <button type="submit" class="btn btn-primary px-4">Simpan</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="product-preview h-100">
-                    <img src="{{ asset('image/contoh-baju-tka.svg') }}" alt="Contoh baju jurusan TKA">
-                    <div class="preview-body">
-                        <h5 class="mb-2">Contoh Baju Jurusan TKA</h5>
-                        <p class="mb-3 text-muted">Ini adalah gambaran model seragam untuk jurusan TKA yang bisa dijadikan acuan saat melakukan pemesanan.</p>
-                        <div class="d-flex flex-wrap">
-                            <span class="badge badge-pill badge-info mr-2 mb-2">Warna Dominan: Biru Navy</span>
-                            <span class="badge badge-pill badge-success mb-2">Formal Sekolah</span>
+                <div class="card content-card h-100">
+                    <div class="card-header py-3">
+                        <h5 class="card-title mb-0">Contoh Baju per Jurusan</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="preview-grid">
+                            @foreach ($jurusans as $jurusan)
+                                <div class="product-preview js-major-card-baju" data-major="{{ $jurusan }}" role="button" tabindex="0">
+                                    <img src="{{ asset('image/contoh-baju-tka.svg') }}" alt="Contoh baju {{ $jurusan }}">
+                                    <div class="preview-body">
+                                        <h6 class="mb-1">{{ $jurusan }}</h6>
+                                        <p class="mb-2 text-muted">Contoh visual seragam untuk referensi pemesanan jurusan ini.</p>
+                                        <span class="badge badge-pill badge-info">Contoh Baju</span>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -129,4 +323,100 @@
         </div>
     </div>
 </div>
+
+<script>
+    (function() {
+        var jurusanSelect = document.getElementById('jurusan-select-baju');
+        if (!jurusanSelect) return;
+
+        var pills = document.querySelectorAll('.js-major-pill-baju');
+        var cards = document.querySelectorAll('.js-major-card-baju');
+        var ukuranSelect = document.getElementById('ukuran-baju-select');
+        var jumlahInput = document.getElementById('jumlah-pesanan-input');
+        var totalEl = document.getElementById('estimasi-total-pdh');
+        var metodeSelect = document.getElementById('metode-pembayaran-select');
+        var paymentLabel = document.getElementById('payment-label');
+        var paymentAccount = document.getElementById('payment-account');
+        var paymentHolder = document.getElementById('payment-holder');
+
+        var hargaJurusan = @json($hargaJurusan);
+        var tambahanUkuran = @json($tambahanUkuran);
+        var paymentMethods = @json($paymentMethods);
+
+        function setJurusan(majorName) {
+            jurusanSelect.value = majorName;
+            pills.forEach(function(pill) {
+                pill.classList.toggle('is-active', pill.getAttribute('data-major') === majorName);
+            });
+            updateEstimasiTotal();
+        }
+
+        function formatRupiah(value) {
+            return new Intl.NumberFormat('id-ID').format(value);
+        }
+
+        function updateEstimasiTotal() {
+            if (!totalEl) return;
+
+            var selectedJurusan = jurusanSelect.value;
+            var selectedUkuran = ukuranSelect ? ukuranSelect.value : '';
+            var jumlah = Number(jumlahInput && jumlahInput.value ? jumlahInput.value : 0);
+
+            var base = Number(hargaJurusan[selectedJurusan] || 0);
+            var add = Number(tambahanUkuran[selectedUkuran] || 0);
+            var unit = base + add;
+            var total = unit * Math.max(jumlah, 0);
+
+            totalEl.textContent = 'Estimasi Total PDH: Rp ' + formatRupiah(total);
+        }
+
+        function updatePaymentDetail() {
+            if (!metodeSelect) return;
+
+            var selected = metodeSelect.value;
+            var method = paymentMethods[selected] || null;
+
+            if (!method) {
+                paymentLabel.textContent = 'Metode: -';
+                paymentAccount.textContent = 'Nomor Rekening / Nomor Wallet: -';
+                paymentHolder.textContent = 'Atas Nama: -';
+                return;
+            }
+
+            paymentLabel.textContent = 'Metode: ' + method.label;
+            paymentAccount.textContent = 'Nomor Rekening / Nomor Wallet: ' + method.account;
+            paymentHolder.textContent = 'Atas Nama: ' + method.holder;
+        }
+
+        if (jurusanSelect.value) {
+            setJurusan(jurusanSelect.value);
+        }
+
+        jurusanSelect.addEventListener('change', updateEstimasiTotal);
+        if (ukuranSelect) ukuranSelect.addEventListener('change', updateEstimasiTotal);
+        if (jumlahInput) jumlahInput.addEventListener('input', updateEstimasiTotal);
+        if (metodeSelect) metodeSelect.addEventListener('change', updatePaymentDetail);
+
+        pills.forEach(function(pill) {
+            pill.addEventListener('click', function() {
+                setJurusan(this.getAttribute('data-major'));
+            });
+        });
+
+        cards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                setJurusan(this.getAttribute('data-major'));
+            });
+            card.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setJurusan(this.getAttribute('data-major'));
+                }
+            });
+        });
+
+        updateEstimasiTotal();
+        updatePaymentDetail();
+    })();
+</script>
 @endsection

@@ -9,6 +9,10 @@ class Pembayaransantri extends Model
 {
     public $timestamps = false;
     protected $table = "Pembayaransantri";
+    protected $primaryKey = 'id_pembayaran';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id_pembayaran',
         'id_santri',
@@ -18,5 +22,6 @@ class Pembayaransantri extends Model
         'atas_nama',
         'nama_bank',
         'jumlah_pembayaran',
+        'status_pembayaran',
     ];  
 }

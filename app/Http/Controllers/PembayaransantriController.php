@@ -62,6 +62,7 @@ class PembayaransantriController extends Controller
             'required' => 'Kolom :attribute wajib diisi.',
             'email' => 'Kolom :attribute harus berupa email yang valid.',
         ]);
+        $validatedData['status_pembayaran'] = 'Belum Lunas';
         Pembayaransantri::create($validatedData);
         return redirect()->route('backend.pembayaransantri.index')->with('success', 'Data berhasil tersimpan');
     }
@@ -74,7 +75,7 @@ class PembayaransantriController extends Controller
 //edit
     public function edit($id)
     {
-        $edit = PembayaranSantri::findOrFail($id);
+        $edit = Pembayaransantri::findOrFail($id);
         $judul = "Edit Data Pembayaran Siswa";
 
         return view('backend.v_pembayaransantri.edit', compact('edit', 'judul'));
@@ -86,7 +87,7 @@ class PembayaransantriController extends Controller
         $Pembayaransantri = Pembayaransantri::findOrFail($id);
         $rules = [
             'id_pembayaran' => 'required',
-            'id_pendaftaran' => 'required|string|max:255',
+            'id_santri' => 'required|string|max:255',
             'jenis_pembayaran' => 'required',
             'tanggal_pembayaran' => 'required',
             'nama_santri' => 'required',
@@ -95,9 +96,23 @@ class PembayaransantriController extends Controller
             'jumlah_pembayaran' => 'required',
         ];
         $validatedData = $request->validate($rules);
+        if (!isset($validatedData['status_pembayaran'])) {
+            $validatedData['status_pembayaran'] = $Pembayaransantri->status_pembayaran ?? 'Belum Lunas';
+        }
         $Pembayaransantri->update($validatedData);
         return redirect()->route('backend.pembayaransantri.index')->with('success', 'Data berhasil diperbaharui');
     }  
+
+    public function bayar(string $id)
+    {
+        $pembayaran = Pembayaransantri::findOrFail($id);
+        $pembayaran->update([
+            'status_pembayaran' => 'Lunas',
+            'tanggal_pembayaran' => now()->toDateString(),
+        ]);
+
+        return redirect()->route('backend.pembayaransantri.index')->with('success', 'Pembayaran berhasil ditandai lunas.');
+    }
 
     //distory
     public function destroy($id)
