@@ -16,3 +16,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# OS artifacts
+.DS_Store
+
+# Local archive artifact (source already present in public/ckeditor)
+/public/ckeditor.zip
