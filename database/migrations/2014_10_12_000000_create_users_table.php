@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->string('id_user')->primary();
-            $table->string('nama');
+            $table->id();
+            $table->string('name');
             $table->string('email')->unique();
-            $table->enum('role',['admin_ppdb','pendaftar'])->default('pendaftar');
-            $table->boolean('status')->default(true); // default aktif
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('hp', 13);
-            $table->rememberToken(); // opsional, untuk login remember-me
+            $table->string('phone', 20)->nullable();
+            $table->enum('role', ['admin_ppdb', 'pendaftar'])->default('pendaftar');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
