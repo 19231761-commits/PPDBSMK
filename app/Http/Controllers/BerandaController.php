@@ -33,7 +33,7 @@ class BerandaController extends Controller
             ]);
         } else {
             // Dashboard Pendaftar
-            $pendaftaranUser = PendaftaranSantri::where('id_user', $user->id_user)->first();
+            $pendaftaranUser = PendaftaranSantri::where('id_user', $user->id)->first();
             $pembayaranUser = $pendaftaranUser ? Pembayaransantri::where('id_santri', $pendaftaranUser->id_santri)->first() : null;
             
             return view('backend.v_beranda.index', [

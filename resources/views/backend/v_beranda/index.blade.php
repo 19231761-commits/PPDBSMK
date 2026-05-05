@@ -173,7 +173,7 @@
             <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
                 <div>
                     <div class="text-uppercase mb-2" style="letter-spacing: 0.06em; font-size: 12px; color: rgba(255,255,255,0.88); font-weight: 800;">Selamat datang di halaman beranda admin</div>
-                    <h4 class="card-title mb-2">Selamat Datang, {{ Auth::user()->nama }}!</h4>
+                    <h4 class="card-title mb-2">Selamat Datang, {{ Auth::user()->name }}!</h4>
                     <p class="mb-0">Anda login sebagai Admin PPDB SMK Sehati Karawang. Semua data pendaftaran, pembayaran, dan pengumuman bisa dikelola dari sini.</p>
                 </div>
                 <span class="badge badge-light mt-3 mt-md-0 px-3 py-2">Dashboard Admin</span>
@@ -321,7 +321,7 @@
             <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
                 <div>
                     <div class="text-uppercase mb-2" style="letter-spacing: 0.06em; font-size: 12px; color: rgba(255,255,255,0.88); font-weight: 800;">Selamat datang di halaman beranda pendaftar</div>
-                    <h4 class="card-title mb-2">Selamat Datang, {{ $user->nama }}!</h4>
+                    <h4 class="card-title mb-2">Selamat Datang, {{ $user->name }}!</h4>
                     <p class="mb-0">Silakan lengkapi data pendaftaran, cek informasi, dan pantau status pembayaran Anda dari satu tempat.</p>
                 </div>
                 <span class="badge badge-light mt-3 mt-md-0 px-3 py-2">Dashboard Pendaftar</span>

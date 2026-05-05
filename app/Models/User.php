@@ -18,15 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $table = "users";
-     protected $fillable = [
-        'id_user',
-        'nama',
+    protected $fillable = [
+        'name',
         'email',
-        'role',
-        'status',
         'password',
-        'hp',
-        'foto',
+        'phone',
+        'role',
     ];
 
     /**
@@ -48,7 +45,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $primaryKey = 'id_user';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    // Use the default auto-incrementing integer primary key: id
 }

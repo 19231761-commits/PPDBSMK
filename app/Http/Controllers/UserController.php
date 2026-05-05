@@ -27,7 +27,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_user' => 'required',
             'nama' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
@@ -36,45 +35,41 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'id_user' => $request->id_user,
-            'nama' => $request->nama,
+            'name' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'hp' => $request->hp,
+            'phone' => $request->hp,
             'role' => $request->role,
-            'status' => true,
         ]);
 
         return redirect()->route('backend.user.index')->with('success', 'User berhasil ditambahkan');
     }
 
     // Menampilkan form edit
-    public function edit($id_user)
+    public function edit($id)
     {
-        $user = User::findOrFail($id_user);
+        $user = User::findOrFail($id);
         $judul = "Edit User"; // atau judul lain sesuai kebutuhan
         return view('backend.v_user.edit', compact('user', 'judul'));
     }
 
     // Proses update user
-    public function update(Request $request, $id_user)
+    public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id_user);
+        $user = User::findOrFail($id);
 
         $request->validate([
             'nama' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id_user . ',id_user',
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'role' => 'required|in:admin_ppdb,pendaftar',
-            'status' => 'required|in:0,1',
             'hp' => 'required|digits_between:10,13'
         ]);
 
         $data = [
-            'nama' => $request->nama,
+            'name' => $request->nama,
             'email' => $request->email,
             'role' => $request->role,
-            'hp' => $request->hp,
-            'status' => $request->status,
+            'phone' => $request->hp,
         ];
 
         if ($request->filled('password')) {
@@ -87,9 +82,9 @@ class UserController extends Controller
     }
 
     // Menghapus user
-    public function destroy($id_user)
+    public function destroy($id)
     {
-        $user = User::findOrFail($id_user);
+        $user = User::findOrFail($id);
         $user->delete();
 
         return redirect()->route('backend.user.index')->with('success', 'User berhasil dihapus');

@@ -46,7 +46,7 @@ class PendaftaranSantriController extends Controller
             'judul' => 'Form Pendaftaran PPDB',
             'create' => $PendaftaranSantri,
             'id_santri_default' => $this->generateIdSantri(),
-            'id_user_default' => Auth::check() ? Auth::user()->id_user : '',
+            'id_user_default' => Auth::id() ?? '',
             'tgl_pendaftaran_default' => now()->format('Y-m-d'),
         ]);
     }
@@ -96,7 +96,7 @@ class PendaftaranSantriController extends Controller
     {
         $validatedData = $request->validate([
             'id_santri' => 'nullable|string|max:255',
-            'id_user'=>'nullable|string|max:255',
+            'id_user' => 'nullable|integer',
             'tgl_pendaftaran' => 'nullable|string|max:255',
             'nama_santri' => 'required|string|max:255',
             'tempat_lahir' => 'required|string|max:255',
@@ -149,7 +149,7 @@ class PendaftaranSantriController extends Controller
         ]);
 
         $validatedData['id_santri'] = $validatedData['id_santri'] ?? $this->generateIdSantri();
-        $validatedData['id_user'] = Auth::check() ? Auth::user()->id_user : ($validatedData['id_user'] ?? '');
+        $validatedData['id_user'] = Auth::id() ?? ($validatedData['id_user'] ?? null);
         $validatedData['tgl_pendaftaran'] = $validatedData['tgl_pendaftaran'] ?? now()->format('Y-m-d');
         $validatedData['tempat_tanggal_lahir'] = $validatedData['tempat_lahir'] . ', ' . $validatedData['tanggal_lahir'];
         $validatedData['no_telpon'] = $validatedData['no_hp_siswa'];

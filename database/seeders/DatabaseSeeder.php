@@ -11,23 +11,19 @@ class DatabaseSeeder extends Seeder
     {
         // Create only admin and demo pendaftar users
         User::create([
-            'id_user' => 'U001',
-            'nama' => 'Admin Sistem',
+            'name' => 'Admin Sistem',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin123'),
             'role' => 'admin_ppdb',
-            'status' => true,
-            'hp' => '081234567890',
+            'phone' => '081234567890',
         ]);
 
         User::create([
-            'id_user' => 'U002',
-            'nama' => 'Pendaftar Demo',
+            'name' => 'Pendaftar Demo',
             'email' => 'pendaftar@gmail.com',
             'password' => bcrypt('12345'),
             'role' => 'pendaftar',
-            'status' => true,
-            'hp' => '081234567891',
+            'phone' => '081234567891',
         ]);
     }
 }

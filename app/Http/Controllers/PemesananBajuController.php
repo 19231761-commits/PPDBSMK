@@ -39,7 +39,7 @@ class PemesananBajuController extends Controller
         $totalBayar = $hargaSatuanContoh * (int) $validated['jumlah_pesanan'];
 
         PemesananBaju::create([
-            'user_id' => $request->user()->id_user,
+            'user_id' => $request->user()->id,
             'nama_siswa' => $validated['nama_siswa'],
             'jurusan' => $validated['jurusan'],
             'ukuran_baju' => $validated['ukuran_baju'],
@@ -50,11 +50,11 @@ class PemesananBajuController extends Controller
 
         Pembayaransantri::create([
             'id_pembayaran' => 'BYR' . now()->format('YmdHis') . rand(10, 99),
-            'id_santri' => $request->user()->id_user,
+            'id_santri' => $request->user()->id,
             'jenis_pembayaran' => 'Pemesanan Baju',
             'tanggal_pembayaran' => now()->toDateString(),
             'nama_santri' => $validated['nama_siswa'],
-            'atas_nama' => $request->user()->nama,
+            'atas_nama' => $request->user()->name,
             'nama_bank' => $paymentMethods[$validated['metode_pembayaran']]['label'],
             'jumlah_pembayaran' => $totalBayar,
         ]);

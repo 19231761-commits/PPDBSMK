@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -26,23 +25,13 @@ class RegisterController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        $idUser = 'PD-' . now()->format('YmdHis') . '-' . Str::upper(Str::random(4));
-
-        while (User::where('id_user', $idUser)->exists()) {
-            $idUser = 'PD-' . now()->format('YmdHis') . '-' . Str::upper(Str::random(4));
-        }
-
-        User::create([
-            'id_user' => $idUser,
-            'nama' => $validated['nama'],
+        $user = User::create([
+            'name' => $validated['nama'],
             'email' => $validated['email'],
-            'hp' => $validated['hp'],
+            'phone' => $validated['hp'],
             'role' => 'pendaftar',
-            'status' => true,
             'password' => Hash::make($validated['password']),
         ]);
-
-        $user = User::where('id_user', $idUser)->first();
 
         Auth::login($user);
         $request->session()->regenerate();

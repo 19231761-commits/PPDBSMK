@@ -26,11 +26,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>ID User</th>
+                                    <th>ID</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Role</th>
-                                    <th>Status</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -38,8 +37,8 @@
                                 @forelse ($users as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><span class="badge bg-purple">{{ $row->id_user }}</span></td>
-                                        <td class="font-weight-bold">{{ $row->nama }}</td>
+                                        <td><span class="badge bg-purple">{{ $row->id }}</span></td>
+                                        <td class="font-weight-bold">{{ $row->name }}</td>
                                         <td>{{ $row->email }}</td>
                                         <td>
                                             @if ($row->role == 'admin_ppdb')
@@ -48,21 +47,14 @@
                                                 <span class="badge bg-success">Pendaftar</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            @if ($row->status == 1)
-                                                <span class="badge bg-success">Aktif</span>
-                                            @else
-                                                <span class="badge bg-secondary">Nonaktif</span>
-                                            @endif
-                                        </td>
                                         <td class="text-center">
-                                            <a href="{{ route('backend.user.edit', $row->id_user) }}" class="btn btn-sm btn-purple mb-1" title="Ubah Data">
+                                            <a href="{{ route('backend.user.edit', $row->id) }}" class="btn btn-sm btn-purple mb-1" title="Ubah Data">
                                                 <i class="far fa-edit"></i> Ubah
                                             </a>
-                                            <form method="POST" action="{{ route('backend.user.destroy', $row->id_user) }}" class="d-inline-block">
+                                            <form method="POST" action="{{ route('backend.user.destroy', $row->id) }}" class="d-inline-block">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm btn-danger show_confirm mb-1" data-konf-delete="{{ $row->nama }}" title="Hapus Data">
+                                                <button type="submit" class="btn btn-sm btn-danger show_confirm mb-1" data-konf-delete="{{ $row->name }}" title="Hapus Data">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </button>
                                             </form>
@@ -70,7 +62,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center text-muted py-4">Belum ada user</td>
+                                        <td colspan="6" class="text-center text-muted py-4">Belum ada user</td>
                                     </tr>
                                 @endforelse
                             </tbody>

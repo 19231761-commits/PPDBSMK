@@ -27,14 +27,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Id User</label>
-                                    <input type="text" name="id_user" value="{{ old('id_user') }}" class="form-control @error('id_user') is-invalid @enderror" placeholder="Masukkan ID User">
-                                    @error('id_user')
-                                    <span class="invalid-feedback alert-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
                                     <label>Nama</label>
                                     <input type="text" name="nama" value="{{ old('nama') }}" class="form-control @error('nama') is-invalid @enderror" placeholder="Masukkan Nama">
                                     @error('nama')
@@ -64,14 +56,6 @@
                                     @error('password')
                                     <span class="invalid-feedback alert-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select name="status" class="form-control">
-                                        <option value="1" selected>Aktif</option>
-                                        <option value="0">NonAktif</option>
-                                    </select>
                                 </div>
 
                                 <div class="form-group">

@@ -28,18 +28,12 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            // Cek status akun
-            if ($user && !$user->status) {
-                Auth::logout();
-                return back()->with('error', 'Akun Anda belum aktif. Silakan hubungi admin PPDB.');
-            }
-
             // Role-based redirect
             switch ($user->role) {
                 case 'pendaftar':
                     // Redirect pendaftar ke form pendaftaran
                     return redirect()->route('backend.pendaftaran.form')
-                        ->with('success', 'Selamat datang ' . $user->nama . '! Silakan lengkapi form pendaftaran.');
+                        ->with('success', 'Selamat datang ' . $user->name . '! Silakan lengkapi form pendaftaran.');
                 
                 case 'admin_ppdb':
                     // Redirect admin PPDB ke dashboard admin
