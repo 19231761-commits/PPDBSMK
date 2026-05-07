@@ -11,7 +11,7 @@ return new class extends Migration {
 
         Schema::create('pemesanan_baju', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id', 50);
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('nama_siswa', 120);
             $table->string('jurusan', 120);
             $table->string('ukuran_baju', 10);
@@ -19,12 +19,9 @@ return new class extends Migration {
             $table->string('warna_keterangan', 150)->nullable();
             $table->text('catatan')->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id')
-                ->references('id_user')
-                ->on('users')
-                ->cascadeOnDelete();
         });
+
+        // note: foreign key created via foreignId()->constrained() above
     }
 
     public function down(): void
