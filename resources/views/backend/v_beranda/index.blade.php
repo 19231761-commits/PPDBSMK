@@ -416,6 +416,35 @@
                         <h5 class="card-title"><i class="mdi mdi-clipboard-check mr-1"></i> Status Pendaftaran Anda</h5>
                     </div>
                     <div class="card-body">
+                        @php
+                            $stepData = $pendaftaran && $pendaftaran->nama_santri;
+                            $stepUpload = $pendaftaran && $pendaftaran->pas_foto && $pendaftaran->scan_kk && $pendaftaran->akta_kelahiran && $pendaftaran->ijazah_skl;
+                            $stepPayment = (bool) $pembayaran;
+                            $stepVerify = data_get($pendaftaran, 'status_verifikasi') === 'terverifikasi';
+                            $steps = [
+                                ['label' => '1 Data Diri', 'done' => $stepData],
+                                ['label' => '2 Upload Berkas', 'done' => $stepUpload],
+                                ['label' => '3 Pembayaran', 'done' => $stepPayment],
+                                ['label' => '4 Verifikasi', 'done' => $stepVerify],
+                            ];
+                            $activeIndex = 0;
+                            foreach ($steps as $index => $step) {
+                                if (!$step['done']) {
+                                    $activeIndex = $index;
+                                    break;
+                                }
+                                $activeIndex = $index;
+                            }
+                        @endphp
+
+                        <div class="progress-steps mb-4">
+                            @foreach ($steps as $index => $step)
+                                <div class="step {{ $step['done'] ? 'complete' : ($index === $activeIndex ? 'active' : '') }}">
+                                    {{ $step['label'] }}
+                                </div>
+                            @endforeach
+                        </div>
+
                         @if($pendaftaran)
                             <div class="row">
                                 <div class="col-md-6 mb-3">

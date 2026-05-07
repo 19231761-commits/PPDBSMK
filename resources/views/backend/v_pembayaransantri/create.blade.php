@@ -12,7 +12,7 @@
         'E-Wallet ShopeePay',
     ];
 @endphp
-<div class="container-fluid">
+<div class="container-fluid form-two-col">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -26,119 +26,107 @@
                             <p class="mb-0 text-muted">Isi data pembayaran siswa dengan benar sebelum disimpan.</p>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="id_pembayaran">Id Pembayaran</label>
-                                            <input type="text" id="idpembayaran" name="id_pembayaran" value="{{ old('id_pembayaran') }}"
-                                                class="form-control @error('id_pembayaran') is-invalid @enderror"
-                                                placeholder="Masukkan id pembayaran">
-                                            @error('id_pembayaran')
-                                            <span class="invalid-feedback alert-danger" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                        <label for="idsantri">Id Siswa</label>
-                                    <input type="text" id="idsantri" name="id_santri" value="{{ old('id_santri') }}"
-                                        class="form-control @error('id_santri') is-invalid @enderror"
-                                        placeholder="Masukkan Id Siswa">
-                                    @error('id_santri')
-                                    <span class="invalid-feedback alert-danger" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                    @enderror
-                                </div>
-                                        <div class="form-group">
-                                            <label for="jenis_pembayaran">Jenis Pembayaran</label>
-                                            <input type="text" id="jenispembayaran" name="jenis_pembayaran" value="{{ old('jenis_pembayaran') }}"
-                                                class="form-control @error('jenis_pembayaran') is-invalid @enderror"
-                                                placeholder="Masukkan Jenis Pembayaran">
-                                            @error('Jenis_pembayaran')
-                                            <span class="invalid-feedback alert-danger" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="tanggal pembayaran">Tanggal Pembayaran</label>
-                                            <input type="date" id="tanggalpembayaran" name="tanggal_pembayaran"
-                                                value="{{ old('tanggal_pembayaran') }}"
-                                                class="form-control @error('tanggal_pembayaran') is-invalid @enderror"
-                                                placeholder="Masukkan tanggal pembayaran">
-                                            @error('tanggal_pembayaran')
-                                            <span class="invalid-feedback alert-danger" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="namasantri">Nama Siswa</label>
-                                            <input type="text" id="namasantri" name="nama_santri" value="{{ old('nama_santri') }}"
-                                                class="form-control @error('nama_santri') is-invalid @enderror"
-                                                placeholder="Masukkan Nama Siswa" onkeypress="return hanyaAngka(event)">
-                                            @error('nama_santri')
-                                            <span class="invalid-feedback alert-danger" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="atasnama">Atas Nama</label>
-                                            <input type="text" id="atasnama" name="atas_nama" value="{{ old('atas_nama') }}"
-                                                class="form-control @error('atas_nama') is-invalid @enderror"
-                                                placeholder="Masukkan Atas Nama" onkeypress="return hanyaAngka(event)">
-                                            @error('atas_nama')
-                                            <span class="invalid-feedback alert-danger" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="namabank">Nama Bank</label>
-                                            <select id="namabank" name="nama_bank"
-                                                class="form-control @error('nama_bank') is-invalid @enderror">
-                                                <option value="" disabled {{ old('nama_bank') ? '' : 'selected' }}>Pilih metode pembayaran</option>
-                                                @foreach ($metodePembayaran as $metode)
-                                                    <option value="{{ $metode }}" {{ old('nama_bank') === $metode ? 'selected' : '' }}>{{ $metode }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('nama_bank')
-                                            <span class="invalid-feedback alert-danger" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="jumlahpembayaran">Jumlah Pembayaran</label>
-                                            <input type="text" id="jumlahpembayaran" name="jumlah_pembayaran" value="{{ old('jumlah_pembayaran') }}"
-                                                class="form-control @error('jumlah_pembayaran') is-invalid @enderror"
-                                                placeholder="Masukkan Jumlah Pembayaran" onkeypress="return hanyaAngka(event)">
-                                            @error('jumlah_pembayaran')
-                                            <span class="invalid-feedback alert-danger" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                </div>
+                            <div class="col-md-6 form-group">
+                                <label for="id_pembayaran">Id Pembayaran</label>
+                                <input type="text" id="idpembayaran" name="id_pembayaran" value="{{ old('id_pembayaran') }}"
+                                    class="form-control @error('id_pembayaran') is-invalid @enderror"
+                                    placeholder="Masukkan id pembayaran">
+                                @error('id_pembayaran')
+                                <span class="invalid-feedback alert-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="idsantri">Id Siswa</label>
+                                <input type="text" id="idsantri" name="id_santri" value="{{ old('id_santri') }}"
+                                    class="form-control @error('id_santri') is-invalid @enderror"
+                                    placeholder="Masukkan Id Siswa">
+                                @error('id_santri')
+                                <span class="invalid-feedback alert-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="jenis_pembayaran">Jenis Pembayaran</label>
+                                <input type="text" id="jenispembayaran" name="jenis_pembayaran" value="{{ old('jenis_pembayaran') }}"
+                                    class="form-control @error('jenis_pembayaran') is-invalid @enderror"
+                                    placeholder="Masukkan Jenis Pembayaran">
+                                @error('Jenis_pembayaran')
+                                <span class="invalid-feedback alert-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="tanggal pembayaran">Tanggal Pembayaran</label>
+                                <input type="date" id="tanggalpembayaran" name="tanggal_pembayaran"
+                                    value="{{ old('tanggal_pembayaran') }}"
+                                    class="form-control @error('tanggal_pembayaran') is-invalid @enderror"
+                                    placeholder="Masukkan tanggal pembayaran">
+                                @error('tanggal_pembayaran')
+                                <span class="invalid-feedback alert-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="namasantri">Nama Siswa</label>
+                                <input type="text" id="namasantri" name="nama_santri" value="{{ old('nama_santri') }}"
+                                    class="form-control @error('nama_santri') is-invalid @enderror"
+                                    placeholder="Masukkan Nama Siswa" onkeypress="return hanyaAngka(event)">
+                                @error('nama_santri')
+                                <span class="invalid-feedback alert-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="atasnama">Atas Nama</label>
+                                <input type="text" id="atasnama" name="atas_nama" value="{{ old('atas_nama') }}"
+                                    class="form-control @error('atas_nama') is-invalid @enderror"
+                                    placeholder="Masukkan Atas Nama" onkeypress="return hanyaAngka(event)">
+                                @error('atas_nama')
+                                <span class="invalid-feedback alert-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="namabank">Nama Bank</label>
+                                <select id="namabank" name="nama_bank"
+                                    class="form-control @error('nama_bank') is-invalid @enderror">
+                                    <option value="" disabled {{ old('nama_bank') ? '' : 'selected' }}>Pilih metode pembayaran</option>
+                                    @foreach ($metodePembayaran as $metode)
+                                        <option value="{{ $metode }}" {{ old('nama_bank') === $metode ? 'selected' : '' }}>{{ $metode }}</option>
+                                    @endforeach
+                                </select>
+                                @error('nama_bank')
+                                <span class="invalid-feedback alert-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="jumlahpembayaran">Jumlah Pembayaran</label>
+                                <input type="text" id="jumlahpembayaran" name="jumlah_pembayaran" value="{{ old('jumlah_pembayaran') }}"
+                                    class="form-control @error('jumlah_pembayaran') is-invalid @enderror"
+                                    placeholder="Masukkan Jumlah Pembayaran" onkeypress="return hanyaAngka(event)">
+                                @error('jumlah_pembayaran')
+                                <span class="invalid-feedback alert-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="border-top">
-                            <div class="border-top">
-                                <div class="card-body">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                    <a href="{{ route('backend.pembayaransantri.index') }}">
-                                        <button type="button" class="btn btn-secondary">Kembali</button>
-                                    </a>
-                                </div>
+                            <div class="card-body px-0">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <a href="{{ route('backend.pembayaransantri.index') }}" class="btn btn-secondary">Kembali</a>
                             </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

@@ -12,7 +12,7 @@
         'E-Wallet ShopeePay',
     ];
 @endphp
-<div class="container-fluid">
+<div class="container-fluid form-two-col">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -26,8 +26,7 @@
                             <p class="mb-0 text-muted">Perbarui transaksi pembayaran siswa jika ada perubahan data.</p>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
+                            <div class="col-md-6 form-group">
                                     <label for="id_pembayaran">Id Pembayaran</label>
                                     <input type="text" id="idpembayaran" name="id_pembayaran"
                                         value="{{ old('id_pembayaran', $edit->id_pembayaran) }}"
@@ -40,7 +39,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="idsantri">Id Siswa</label>
                                     <input type="text" id="idsantri" name="id_santri"
                                         value="{{ old('id_santri', $edit->id_santri) }}"
@@ -53,7 +52,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="jenis_pembayaran">Jenis Pembayaran</label>
                                     <input type="text" id="jenispembayaran" name="jenis_pembayaran"
                                         value="{{ old('jenis_pembayaran', $edit->jenis_pembayaran) }}"
@@ -66,7 +65,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="tanggalpembayaran">Tanggal Pembayaran</label>
                                     <input type="date" id="tanggalpembayaran" name="tanggal_pembayaran"
                                         value="{{ old('tanggal_pembayaran', $edit->tanggal_pembayaran) }}"
@@ -78,7 +77,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="namasantri">Nama Siswa</label>
                                     <input type="text" id="namasantri" name="nama_santri"
                                         value="{{ old('nama_santri', $edit->nama_santri) }}"
@@ -91,7 +90,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="atasnama">Atas Nama</label>
                                     <input type="text" id="atasnama" name="atas_nama"
                                         value="{{ old('atas_nama', $edit->atas_nama) }}"
@@ -104,7 +103,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="namabank">Nama Bank</label>
                                     <select id="namabank" name="nama_bank"
                                         class="form-control @error('nama_bank') is-invalid @enderror">
@@ -120,7 +119,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col-md-6 form-group">
                                     <label for="jumlahpembayaran">Jumlah Pembayaran</label>
                                     <input type="text" id="jumlahpembayaran" name="jumlah_pembayaran"
                                         value="{{ old('jumlah_pembayaran', $edit->jumlah_pembayaran) }}"
@@ -136,11 +135,9 @@
                         </div>
                     </div>
                     <div class="border-top">
-                        <div class="card-body">
+                        <div class="card-body px-0">
                             <button type="submit" class="btn btn-primary">Perbaharui</button>
-                            <a href="{{ route('backend.pembayaransantri.index') }}">
-                                <button type="button" class="btn btn-secondary">Kembali</button>
-                            </a>
+                            <a href="{{ route('backend.pembayaransantri.index') }}" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>
                 </form>

@@ -19,6 +19,16 @@
     ];
 
     $hargaSatuanBuku = $hargaSatuanBuku ?? 25000;
+    $paymentMethods = $paymentMethods ?? [
+        'BCA' => ['label' => 'Transfer Bank BCA', 'account' => 'BCA 1234567890', 'holder' => 'Yayasan SMK Sehati'],
+        'BRI' => ['label' => 'Transfer Bank BRI', 'account' => 'BRI 9876543210', 'holder' => 'Yayasan SMK Sehati'],
+        'BNI' => ['label' => 'Transfer Bank BNI', 'account' => 'BNI 1122334455', 'holder' => 'Yayasan SMK Sehati'],
+        'MANDIRI' => ['label' => 'Transfer Bank Mandiri', 'account' => 'Mandiri 5566778899', 'holder' => 'Yayasan SMK Sehati'],
+        'DANA' => ['label' => 'E-Wallet DANA', 'account' => 'DANA 081234567890', 'holder' => 'PPDB SMK Sehati'],
+        'GOPAY' => ['label' => 'E-Wallet GoPay', 'account' => 'GoPay 081234567891', 'holder' => 'PPDB SMK Sehati'],
+        'OVO' => ['label' => 'E-Wallet OVO', 'account' => 'OVO 081234567892', 'holder' => 'PPDB SMK Sehati'],
+        'SHOPEEPAY' => ['label' => 'E-Wallet ShopeePay', 'account' => 'ShopeePay 081234567893', 'holder' => 'PPDB SMK Sehati'],
+    ];
 @endphp
 
 <div class="order-page is-success">
@@ -96,6 +106,37 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
+                                    <label>Metode Pembayaran</label>
+                                    <select class="custom-select form-control" id="metode-pembayaran-select" name="metode_pembayaran" required>
+                                        <option value="" disabled {{ old('metode_pembayaran') ? '' : 'selected' }}>Pilih metode pembayaran</option>
+                                        @foreach ($paymentMethods as $code => $method)
+                                            <option value="{{ $code }}" {{ old('metode_pembayaran') === $code ? 'selected' : '' }}>{{ $method['label'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="price-box mb-3">
+                                <h6 class="mb-2">Estimasi Biaya</h6>
+                                <div class="price-line">
+                                    <span>Harga satuan buku</span>
+                                    <span>Rp {{ number_format($hargaSatuanBuku, 0, ',', '.') }}</span>
+                                </div>
+                                <div class="price-line mb-0">
+                                    <span>Total estimasi</span>
+                                    <span id="estimasi-total-buku">Rp 0</span>
+                                </div>
+                            </div>
+
+                            <div class="payment-box mb-3">
+                                <h6 class="mb-2">Tujuan Pembayaran</h6>
+                                <div class="payment-detail" id="payment-label">Metode: -</div>
+                                <div class="payment-detail" id="payment-account">Nomor Rekening / Nomor Wallet: -</div>
+                                <div class="payment-detail mb-0" id="payment-holder">Atas Nama: -</div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
                                     <label>Semester / Kelas</label>
                                     <input type="text" name="semester_kelas" class="form-control" placeholder="Contoh: X TKA 1" value="{{ old('semester_kelas') }}">
                                 </div>
@@ -105,6 +146,7 @@
                                 <label>Catatan</label>
                                 <textarea class="form-control" name="catatan" rows="3" placeholder="Tulis catatan tambahan jika ada">{{ old('catatan') }}</textarea>
                                 <div class="form-hint">Tips: tulis detail mapel atau edisi buku agar tidak tertukar.</div>
+                                <div class="form-hint">Setelah disimpan, data buku juga otomatis masuk ke menu pembayaran.</div>
                             </div>
 
                             <div class="mb-2">
@@ -126,7 +168,7 @@
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary px-4">Simpan</button>
+                                <button type="submit" class="btn btn-primary px-4">Pesan & Masuk Pembayaran</button>
                             </div>
                         </form>
                     </div>
@@ -168,7 +210,12 @@
         var jenisBukuSelect = document.getElementById('jenis-buku-select');
         var jumlahBukuInput = document.getElementById('jumlah-buku-input');
         var totalEl = document.getElementById('estimasi-total-buku');
+        var metodeSelect = document.getElementById('metode-pembayaran-select');
+        var paymentLabel = document.getElementById('payment-label');
+        var paymentAccount = document.getElementById('payment-account');
+        var paymentHolder = document.getElementById('payment-holder');
         var hargaSatuanBuku = Number(@json($hargaSatuanBuku));
+        var paymentMethods = @json($paymentMethods);
 
         function setJurusan(majorName) {
             jurusanSelect.value = majorName;
@@ -191,6 +238,24 @@
             var total = Math.max(jumlah, 0) * hargaSatuanBuku;
 
             totalEl.textContent = 'Rp ' + formatRupiah(total);
+        }
+
+        function updatePaymentDetail() {
+            if (!metodeSelect) return;
+
+            var selected = metodeSelect.value;
+            var method = paymentMethods[selected] || null;
+
+            if (!method) {
+                paymentLabel.textContent = 'Metode: -';
+                paymentAccount.textContent = 'Nomor Rekening / Nomor Wallet: -';
+                paymentHolder.textContent = 'Atas Nama: -';
+                return;
+            }
+
+            paymentLabel.textContent = 'Metode: ' + method.label;
+            paymentAccount.textContent = 'Nomor Rekening / Nomor Wallet: ' + method.account;
+            paymentHolder.textContent = 'Atas Nama: ' + method.holder;
         }
 
         pills.forEach(function(pill) {
@@ -219,11 +284,16 @@
             jumlahBukuInput.addEventListener('input', updateSummary);
         }
 
+        if (metodeSelect) {
+            metodeSelect.addEventListener('change', updatePaymentDetail);
+        }
+
         if (jenisBukuSelect) {
             jenisBukuSelect.addEventListener('change', updateSummary);
         }
 
         updateSummary();
+        updatePaymentDetail();
     })();
 </script>
 @endsection

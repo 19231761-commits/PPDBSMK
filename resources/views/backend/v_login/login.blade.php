@@ -1,106 +1,113 @@
 <!doctype html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/logoo.jpg') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>Login • PPDB SMK Sehati Karawang</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Login - PPDB SMK Sehati Karawang</title>
+    <link href="{{ asset('backend/dist/css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/dist/css/custom-dashboard.css') }}" rel="stylesheet">
 </head>
-
 <body class="auth-page">
-    <div class="container py-5">
-        <div class="row g-4 align-items-stretch justify-content-center">
-            <div class="col-12 col-lg-7">
-                <div class="auth-hero position-relative overflow-hidden rounded-4 h-100 p-4 p-md-5">
-                    <div class="position-relative" style="z-index: 1;">
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <img class="auth-logo shadow" src="{{ asset('backend/images/logoo.jpg') }}" alt="Logo PPDB SMK Sehati Karawang">
-                            <div>
-                                <div class="text-white-50 fw-semibold" style="letter-spacing: .08em; font-size: 11px;">SELAMAT DATANG</div>
-                                <div class="h5 mb-0 fw-bold text-white">PPDB SMK Sehati Karawang</div>
-                            </div>
-                        </div>
+    <div class="auth-wrap">
+        <div class="auth-left">
+            <div class="auth-hero">
+                <div class="mb-4">
+                    <img src="{{ asset('backend/images/logoo.jpg') }}" alt="Logo" class="auth-logo mb-3">
+                    <h1 class="h2 font-weight-bold text-white mb-3">PPDB SMK Sehati Karawang</h1>
+                    <p class="text-white-50 mb-0" style="line-height: 1.8;">Platform pendaftaran siswa baru dengan pengalaman seperti aplikasi startup: cepat, rapi, dan jelas untuk pendaftar maupun admin sekolah.</p>
+                </div>
 
-                        <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill border border-white border-opacity-25 bg-white bg-opacity-10 text-white fw-semibold mb-3">
-                            Pendaftaran online yang rapi, cepat, dan terarah
-                        </div>
-
-                        <h2 class="display-6 fw-bold text-white mb-3">Masuk ke sistem dari satu pintu yang lebih nyaman.</h2>
-                        <p class="text-white-75 mb-4" style="line-height: 1.8;">
-                            Login untuk admin PPDB maupun pendaftar. Setelah masuk, pendaftar bisa langsung melanjutkan
-                            pengisian data dengan alur yang lebih jelas.
-                        </p>
-
-                        <div class="row g-3 mt-auto">
-                            <div class="col-12 col-md-6">
-                                <div class="p-3 rounded-4 border border-white border-opacity-10 bg-white bg-opacity-10">
-                                    <div class="fw-bold text-white mb-1">Untuk Pendaftar</div>
-                                    <div class="text-white-75 small" style="line-height: 1.6;">Buat akun lalu lanjut isi formulir pendaftaran dengan alur yang jelas.</div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="p-3 rounded-4 border border-white border-opacity-10 bg-white bg-opacity-10">
-                                    <div class="fw-bold text-white mb-1">Untuk Admin PPDB</div>
-                                    <div class="text-white-75 small" style="line-height: 1.6;">Pantau pendaftaran, pembayaran, dan pengumuman dari dashboard terpusat.</div>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="p-3 rounded" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18); border-radius: 14px;">
+                            <div class="font-weight-bold text-white">Alur Terarah</div>
+                            <div class="text-white-50 small">Data diri, upload berkas, pembayaran, dan verifikasi dalam satu alur.</div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-5">
-                <div class="card border-0 shadow-lg h-100">
-                    <div class="card-body p-4 p-md-5">
-                        <h1 class="h4 fw-bold mb-1">Login PPDB</h1>
-                        <p class="text-secondary mb-4">Masuk menggunakan email dan password akun PPDB Anda.</p>
-
-                        @if(session('success'))
-                            <div class="alert alert-success" role="alert">{{ session('success') }}</div>
-                        @endif
-
-                        @if(session('error'))
-                            <div class="alert alert-danger" role="alert">{{ session('error') }}</div>
-                        @endif
-
-                        <form action="{{ route('backend.login.authenticate') }}" method="POST" class="vstack gap-3">
-                            @csrf
-                            <div>
-                                <label for="email" class="form-label fw-semibold">E-Mail</label>
-                                <input id="email" type="email" name="email" class="form-control form-control-lg" placeholder="contoh@email.com" value="{{ old('email') }}" required autofocus>
-                            </div>
-
-                            <div>
-                                <label for="password" class="form-label fw-semibold">Password</label>
-                                <input id="password" type="password" name="password" class="form-control form-control-lg" placeholder="Masukkan password" required>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-lg w-100">Masuk ke Dashboard</button>
-                        </form>
-
-                        <div class="text-center mt-4">
-                            <span class="text-secondary">Belum punya akun?</span>
-                            <a href="{{ route('backend.register') }}" class="fw-semibold text-decoration-none">Daftar sebagai pendaftar</a>
+                    <div class="col-12">
+                        <div class="p-3 rounded" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18); border-radius: 14px;">
+                            <div class="font-weight-bold text-white">Dashboard Terpusat</div>
+                            <div class="text-white-50 small">Pantau status pendaftaran, pembayaran, dan informasi sekolah tanpa berpindah halaman.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="text-center text-white-50 small mt-4">
-            © {{ date('Y') }} PPDB SMK Sehati Karawang
+        <div class="auth-right">
+            <div class="auth-card">
+                <div class="mb-3">
+                    <div class="text-uppercase" style="font-size: 11px; letter-spacing: .08em; color: #64748b; font-weight: 800;">Akses Sistem</div>
+                    <h3 class="mb-2">Masuk ke akun Anda</h3>
+                    <p class="text-muted mb-0">Gunakan email dan password yang sudah terdaftar.</p>
+                </div>
+
+                @if(session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0 pl-3">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('backend.login.authenticate') }}">
+                    @csrf
+                    <div class="form-group mb-3">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus class="form-control @error('email') is-invalid @enderror" placeholder="nama@email.com">
+                        @error('email')
+                            <span class="invalid-feedback d-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3 position-relative">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" name="password" required class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan password">
+                        <button type="button" class="show-pass" onclick="togglePass()" aria-label="Tampilkan password">
+                            <i id="eyeIcon" class="mdi mdi-eye-outline"></i>
+                        </button>
+                        @error('password')
+                            <span class="invalid-feedback d-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group d-flex align-items-center justify-content-between mb-4">
+                        <div class="form-check">
+                            <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                            <label class="form-check-label" for="remember">Remember me</label>
+                        </div>
+                        <span class="small text-muted">Akses aman</span>
+                    </div>
+
+                    <button class="btn btn-primary btn-block btn-lg" type="submit">Masuk ke Dashboard</button>
+                </form>
+
+                <div class="mt-4 small text-muted text-center">
+                    Dengan login, Anda dapat melanjutkan proses pendaftaran dan memantau status terbaru secara real-time.
+                </div>
+            </div>
         </div>
     </div>
-</body>
 
+    <script>
+        function togglePass() {
+            var p = document.getElementById('password');
+            var eye = document.getElementById('eyeIcon');
+
+            if (p.type === 'password') {
+                p.type = 'text';
+                eye.className = 'mdi mdi-eye-off-outline';
+            } else {
+                p.type = 'password';
+                eye.className = 'mdi mdi-eye-outline';
+            }
+        }
+    </script>
+</body>
 </html>
