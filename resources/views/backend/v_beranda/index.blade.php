@@ -4,18 +4,34 @@
 <style>
     .dashboard-wrap .page-hero {
         border: 0;
-        border-radius: 22px;
+        border-radius: var(--theme-radius, 22px);
         overflow: hidden;
-        box-shadow: 0 18px 34px rgba(15, 23, 42, 0.12);
+        box-shadow: 0 18px 44px rgba(15, 23, 42, 0.12);
         color: #fff;
+        position: relative;
+    }
+
+    .dashboard-wrap .page-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 42%),
+            linear-gradient(135deg, rgba(15, 23, 42, 0.16), transparent 55%);
+        pointer-events: none;
+    }
+
+    .dashboard-wrap .page-hero > .card-body {
+        position: relative;
+        z-index: 1;
     }
 
     .dashboard-wrap .page-hero.admin {
-        background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 55%, #7c3aed 100%);
+        background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 62%, #0ea5e9 100%);
     }
 
     .dashboard-wrap .page-hero.pendaftar {
-        background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 55%, #16a34a 100%);
+        background: linear-gradient(135deg, #0f172a 0%, #0369a1 60%, #22c55e 100%);
     }
 
     .dashboard-wrap .page-hero .card-title,
@@ -23,32 +39,45 @@
         color: #fff;
     }
 
+    .dashboard-wrap .page-hero .card-title {
+        letter-spacing: 0.01em;
+        font-weight: 900;
+    }
+
+    .dashboard-wrap .page-hero .badge {
+        align-self: flex-start;
+        width: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .dashboard-wrap .soft-card {
-        border: 1px solid #dbe7f5;
-        border-radius: 20px;
-        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        border: 1px solid var(--theme-border, rgba(15, 23, 42, 0.10));
+        border-radius: var(--theme-radius, 20px);
+        box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
         overflow: hidden;
-        background: rgba(255, 255, 255, 0.96);
+        background: #fff;
     }
 
     .dashboard-wrap .soft-card .card-header {
-        background: linear-gradient(120deg, #eff6ff, #ecfdf5);
-        border-bottom: 1px solid #dbe7f5;
+        background: #f8fafc;
+        border-bottom: 1px solid var(--theme-border, rgba(15, 23, 42, 0.10));
         padding: 14px 18px;
     }
 
     .dashboard-wrap .soft-card .card-title {
         margin-bottom: 0;
         font-weight: 800;
-        color: #0f172a;
+        color: var(--theme-text, #0f172a);
     }
 
     .dashboard-wrap .metric-card {
-        border: 1px solid #dbe7f5;
+        border: 1px solid var(--theme-border, rgba(15, 23, 42, 0.10));
         border-radius: 18px;
         box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
         overflow: hidden;
-        background: rgba(255, 255, 255, 0.96);
+        background: #fff;
         height: 100%;
     }
 
@@ -72,15 +101,15 @@
     }
 
     .dashboard-wrap .metric-card.primary {
-        border-left: 6px solid #1d4ed8;
+        border-left: 6px solid var(--theme-primary-dark, #0369a1);
     }
 
     .dashboard-wrap .metric-card.info {
-        border-left: 6px solid #0ea5e9;
+        border-left: 6px solid var(--theme-primary, #0ea5e9);
     }
 
     .dashboard-wrap .metric-card.success {
-        border-left: 6px solid #16a34a;
+        border-left: 6px solid var(--theme-accent, #22c55e);
     }
 
     .dashboard-wrap .metric-card.warning {
@@ -128,34 +157,86 @@
     }
 
     .dashboard-wrap .action-primary {
-        background: linear-gradient(135deg, #16a34a, #22c55e);
+        background: linear-gradient(135deg, #0369a1, #0ea5e9);
     }
 
     .dashboard-wrap .action-info {
-        background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        background: linear-gradient(135deg, #0f172a, #334155);
     }
 
     .dashboard-wrap .quick-link {
+        position: relative;
         border-radius: 16px;
-        padding: 14px 16px;
-        color: #fff !important;
+        padding: 16px 18px 16px 18px;
+        color: var(--theme-text, #0f172a) !important;
         font-weight: 700;
         text-align: left;
         min-height: 100%;
-        display: block;
-        border: 0;
-        box-shadow: 0 12px 22px rgba(15, 23, 42, 0.12);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 1px solid var(--theme-border, rgba(15, 23, 42, 0.10));
+        background: #fff;
+        box-shadow: 0 10px 18px rgba(15, 23, 42, 0.06);
+        overflow: hidden;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     }
 
     .dashboard-wrap .quick-link small {
         display: block;
         font-weight: 500;
-        opacity: 0.9;
+        color: var(--theme-muted, #64748b);
         margin-top: 6px;
     }
 
+    .dashboard-wrap .quick-link i {
+        font-size: 20px;
+        margin-bottom: 10px;
+        display: inline-flex;
+        width: 38px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: #f8fafc;
+    }
+
+    .dashboard-wrap .quick-link::before {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 5px;
+        background: var(--quick-accent, #0ea5e9);
+    }
+
+    .dashboard-wrap .quick-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 26px rgba(15, 23, 42, 0.10);
+        border-color: rgba(15, 23, 42, 0.14);
+    }
+
+    .dashboard-wrap .quick-link.quick-link-green {
+        --quick-accent: #22c55e;
+    }
+
+    .dashboard-wrap .quick-link.quick-link-blue {
+        --quick-accent: #0ea5e9;
+    }
+
+    .dashboard-wrap .quick-link.quick-link-amber {
+        --quick-accent: #f59e0b;
+    }
+
+    .dashboard-wrap .quick-link.quick-link-slate {
+        --quick-accent: #334155;
+    }
+
+    .dashboard-wrap .quick-link.quick-link-teal {
+        --quick-accent: #14b8a6;
+    }
+
     .dashboard-wrap .table thead th {
-        background: #eff6ff;
+        background: #f8fafc;
         color: #0f172a;
         font-weight: 800;
         border-top: 0;
@@ -449,31 +530,31 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pendaftaran.form') }}" class="quick-link" style="background: linear-gradient(135deg, #16a34a, #22c55e);">
+                                <a href="{{ route('backend.pendaftaran.form') }}" class="quick-link quick-link-green">
                                     <i class="mdi mdi-account-plus mr-1"></i> Form Pendaftaran
                                     <small>Lengkapi data utama pendaftaran.</small>
                                 </a>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pemesanan.baju') }}" class="quick-link" style="background: linear-gradient(135deg, #1d4ed8, #7c3aed);">
+                                <a href="{{ route('backend.pemesanan.baju') }}" class="quick-link quick-link-blue">
                                     <i class="mdi mdi-tshirt-crew mr-1"></i> Pemesanan Baju
                                     <small>Isi form ukuran dan kebutuhan baju.</small>
                                 </a>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pemesanan.buku') }}" class="quick-link" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                <a href="{{ route('backend.pemesanan.buku') }}" class="quick-link quick-link-amber">
                                     <i class="mdi mdi-book-open-page-variant mr-1"></i> Pemesanan Buku
                                     <small>Lihat dan isi form buku yang dibutuhkan.</small>
                                 </a>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pengumuman.index') }}" class="quick-link" style="background: linear-gradient(135deg, #0ea5e9, #0369a1);">
+                                <a href="{{ route('backend.pengumuman.index') }}" class="quick-link quick-link-slate">
                                     <i class="mdi mdi-bell mr-1"></i> Informasi
                                     <small>Baca pengumuman terbaru dari sekolah.</small>
                                 </a>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pembayaransantri.index') }}" class="quick-link" style="background: linear-gradient(135deg, #0f766e, #14b8a6);">
+                                <a href="{{ route('backend.pembayaransantri.index') }}" class="quick-link quick-link-teal">
                                     <i class="mdi mdi-credit-card mr-1"></i> Pembayaran
                                     <small>Pantau riwayat dan status pembayaran.</small>
                                 </a>

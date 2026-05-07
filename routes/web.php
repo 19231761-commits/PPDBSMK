@@ -9,6 +9,8 @@ use App\Http\Controllers\PendaftaranSantriController;
 use App\Http\Controllers\PembayaransantriController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PemesananBajuController;
+use App\Http\Controllers\PemesananBukuController;
+use App\Http\Controllers\RiwayatPesananController;
 use App\Models\PendaftaranSantri;
 
 Route::get('/', function () {
@@ -45,14 +47,21 @@ Route::get('backend/pendaftaran-saya', [PendaftaranSantriController::class, 'cre
 
 Route::get('backend/form-pemesanan-baju', [PemesananBajuController::class, 'create'])
     ->name('backend.pemesanan.baju')
-    ->middleware('auth');
+    ->middleware(['auth', 'check.pendaftar']);
 Route::post('backend/form-pemesanan-baju', [PemesananBajuController::class, 'store'])
     ->name('backend.pemesanan.baju.store')
-    ->middleware('auth');
+    ->middleware(['auth', 'check.pendaftar']);
 
-Route::view('backend/form-pemesanan-buku', 'backend.v_pemesanan_buku.index', [
-    'judul' => 'Form Pemesanan Buku',
-])->name('backend.pemesanan.buku')->middleware('auth');
+Route::get('backend/form-pemesanan-buku', [PemesananBukuController::class, 'create'])
+    ->name('backend.pemesanan.buku')
+    ->middleware(['auth', 'check.pendaftar']);
+Route::post('backend/form-pemesanan-buku', [PemesananBukuController::class, 'store'])
+    ->name('backend.pemesanan.buku.store')
+    ->middleware(['auth', 'check.pendaftar']);
+
+Route::get('backend/riwayat-pesanan', [RiwayatPesananController::class, 'index'])
+    ->name('backend.riwayat.pesanan')
+    ->middleware(['auth', 'check.pendaftar']);
 
 //Route untuk data pendaftaran siswa untuk pemilik    
 Route::get('backend/pemilik/pendaftaran', [PendaftaranSantriController::class, 'pemilik'])

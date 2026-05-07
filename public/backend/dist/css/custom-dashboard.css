@@ -1,0 +1,75 @@
+/* Custom SaaS-like dashboard styles */
+:root{
+  --sidebar-w: 260px;
+  --accent: #0ea5e9;
+  --muted: #64748b;
+  --card-radius: 16px;
+}
+
+/* Layout */
+.app-topbar{position:fixed;left:var(--sidebar-w);right:0;top:0;height:64px;background:linear-gradient(90deg,#0b1220, #0f172a);color:#fff;display:flex;align-items:center;padding:0 18px;z-index:60}
+.app-topbar .btn-icon{background:transparent;border:0;color:#cbd5e1;font-size:20px}
+.app-sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-w);background:linear-gradient(180deg,#071129,#0f172a);color:#fff;z-index:70;overflow:auto}
+.app-sidebar .brand{display:flex;flex-direction:column;align-items:center;padding:22px}
+.app-sidebar .brand-logo{width:64px;height:64px;border-radius:12px;object-fit:contain}
+.app-sidebar .brand-title{font-weight:800;margin-top:8px;font-size:12px;opacity:0.9}
+
+.nav-main{padding:12px}
+.nav-main ul{list-style:none;margin:0;padding:0}
+.nav-main .nav-item{margin:6px 0}
+.nav-main .nav-item a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;color:rgba(255,255,255,0.9);text-decoration:none;font-weight:700;transition:all .25s}
+.nav-main .nav-item a i{font-size:18px;width:22px;text-align:center}
+.nav-main .nav-item a:hover{background:rgba(255,255,255,0.04);transform:translateY(-2px)}
+.nav-main .nav-item.active a{background:linear-gradient(90deg,var(--accent),#0369a1);box-shadow:0 8px 30px rgba(2,6,23,0.4)}
+
+/* Page shell adjustments */
+.page-shell{margin-left:var(--sidebar-w);padding-top:88px;max-width:1280px}
+.mini-sidebar .page-shell{margin-left:88px}
+.mini-sidebar .app-topbar{left:88px}
+.mini-sidebar .app-sidebar{width:88px}
+
+/* Cards */
+.saas-card{border-radius:var(--card-radius);padding:24px;background:#fff;box-shadow:0 10px 30px rgba(2,6,23,0.05);transition:transform .3s ease,box-shadow .3s ease}
+.saas-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.08)}
+.saas-card-body{padding:0}
+
+/* Forms */
+.form-control{border-radius:12px;border:1px solid #e2e8f0;padding:12px 14px;transition:box-shadow .18s ease,border-color .18s ease}
+.form-control:focus{outline:none;box-shadow:0 6px 18px rgba(14,165,233,0.12);border-color:var(--accent)}
+.form-group{margin-bottom:20px}
+.form-row{display:flex;gap:16px}
+.form-row .col{flex:1}
+
+/* Responsive form rules */
+@media(max-width:767px){
+  .form-row{flex-direction:column}
+}
+
+/* Step progress */
+.progress-steps{display:flex;gap:12px;align-items:center}
+.progress-steps .step{flex:1;background:#f1f5f9;padding:12px;border-radius:12px;text-align:center;font-weight:700;color:var(--muted);position:relative}
+.progress-steps .step.active{background:linear-gradient(90deg,var(--accent),#0369a1);color:#fff;box-shadow:0 8px 20px rgba(2,6,23,0.08)}
+
+/* Sticky preview */
+.sticky-preview{position:sticky;top:20px}
+.preview-card{border-radius:12px;padding:12px;background:#fff;border:1px solid #e6eef8}
+.preview-card img{width:100%;border-radius:8px}
+
+/* Auth */
+.auth-page{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+.auth-wrap{display:flex;min-height:100vh}
+.auth-left{flex:1;background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;display:flex;align-items:center;justify-content:center;padding:40px}
+.auth-hero{max-width:420px}
+.auth-right{width:460px;display:flex;align-items:center;justify-content:center;padding:40px}
+.auth-card{background:#fff;border-radius:20px;padding:36px;width:100%;box-shadow:0 12px 30px rgba(2,6,23,0.06)}
+.auth-card .form-control{background:#fff}
+.auth-card .show-pass{position:absolute;right:14px;top:36px;border:0;background:transparent}
+
+/* small tweaks */
+@media(max-width:991px){
+  .app-sidebar{left:-9999px;position:fixed}
+  .page-shell{margin-left:0;padding-top:100px}
+  .app-topbar{left:0}
+  .auth-right{width:100%;padding:24px}
+  .auth-left{display:none}
+}
