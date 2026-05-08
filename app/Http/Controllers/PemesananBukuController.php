@@ -10,13 +10,24 @@ use Illuminate\View\View;
 
 class PemesananBukuController extends Controller
 {
-    public function create(): View
+    public function create(Request $request): View
     {
+        $selectedJurusan = $request->query('jurusan');
+
+        if ($selectedJurusan && in_array($selectedJurusan, $this->jurusans(), true)) {
+            return view('backend.v_pemesanan_buku.form', [
+                'judul' => 'Form Pemesanan Buku',
+                'jurusans' => $this->jurusans(),
+                'jenisBukuOptions' => $this->jenisBukuOptions(),
+                'hargaSatuanBuku' => $this->hargaSatuanBuku(),
+                'paymentMethods' => $this->paymentMethods(),
+                'selectedJurusan' => $selectedJurusan,
+            ]);
+        }
+
         return view('backend.v_pemesanan_buku.index', [
-            'judul' => 'Form Pemesanan Buku',
+            'judul' => 'Pemesanan Buku',
             'jurusans' => $this->jurusans(),
-            'jenisBukuOptions' => $this->jenisBukuOptions(),
-            'hargaSatuanBuku' => $this->hargaSatuanBuku(),
             'paymentMethods' => $this->paymentMethods(),
         ]);
     }

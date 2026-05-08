@@ -5,295 +5,247 @@
     $jurusans = [
         'Farmasi Klinis & Komunitas',
         'Asisten Keperawatan & Caregiver',
+        'Teknik Kendaraan Ringan',
         'Teknik Komputer & Jaringan',
         'Teknik Sepeda Motor',
-        'Teknik Kendaraan Ringan',
-    ];
-
-    $jenisBukuOptions = [
-        'Buku Paket',
-        'Modul Praktik',
-        'Workbook',
-        'Lembar Kerja',
-        'Buku Referensi',
-    ];
-
-    $hargaSatuanBuku = $hargaSatuanBuku ?? 25000;
-    $paymentMethods = $paymentMethods ?? [
-        'BCA' => ['label' => 'Transfer Bank BCA', 'account' => 'BCA 1234567890', 'holder' => 'Yayasan SMK Sehati'],
-        'BRI' => ['label' => 'Transfer Bank BRI', 'account' => 'BRI 9876543210', 'holder' => 'Yayasan SMK Sehati'],
-        'BNI' => ['label' => 'Transfer Bank BNI', 'account' => 'BNI 1122334455', 'holder' => 'Yayasan SMK Sehati'],
-        'MANDIRI' => ['label' => 'Transfer Bank Mandiri', 'account' => 'Mandiri 5566778899', 'holder' => 'Yayasan SMK Sehati'],
-        'DANA' => ['label' => 'E-Wallet DANA', 'account' => 'DANA 081234567890', 'holder' => 'PPDB SMK Sehati'],
-        'GOPAY' => ['label' => 'E-Wallet GoPay', 'account' => 'GoPay 081234567891', 'holder' => 'PPDB SMK Sehati'],
-        'OVO' => ['label' => 'E-Wallet OVO', 'account' => 'OVO 081234567892', 'holder' => 'PPDB SMK Sehati'],
-        'SHOPEEPAY' => ['label' => 'E-Wallet ShopeePay', 'account' => 'ShopeePay 081234567893', 'holder' => 'PPDB SMK Sehati'],
     ];
 @endphp
 
-<div class="order-page is-success">
+<div class="order-page is-primary">
     <div class="row">
         <div class="col-12">
-        <div class="card page-hero-card mb-4">
-            <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
-                <div>
-                    <div class="hero-note mb-2">Selamat datang di halaman input pemesanan buku</div>
-                    <h4 class="card-title mb-2">Form Pemesanan Buku Jurusan TKA</h4>
-                    <p class="mb-0 text-white-50">Tampilan baru dibuat agar pemesanan buku menjadi lebih jelas, cepat, dan nyaman di desktop maupun mobile.</p>
-                </div>
-                <span class="badge bg-secondary mt-3 mt-md-0">Pendaftar</span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-7 mb-4 mb-lg-0">
-                <div class="card content-card h-100">
-                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">Data Pemesanan Buku</h5>
-                        <span class="section-tag">5 Jurusan Aktif</span>
+            <div class="card page-hero-card mb-4">
+                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                    <div>
+                        <div class="hero-note mb-2">Pilih buku jurusan Anda</div>
+                        <h4 class="card-title mb-2">Pemesanan Buku Jurusan SMK Sehati</h4>
+                        <p class="mb-0 text-white-50">Klik salah satu buku di bawah untuk melanjutkan ke formulir pemesanan.</p>
                     </div>
-                    <div class="card-body">
-                        @if (session('success'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('success') }}
-                            </div>
-                        @endif
+                    <span class="book-badge mt-3 mt-md-0">5 Jurusan Tersedia</span>
+                </div>
+            </div>
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger" role="alert">
-                                <strong>Data belum bisa disimpan:</strong>
-                                <ul class="mb-0 pl-3 mt-1">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <form method="POST" action="{{ route('backend.pemesanan.buku.store') }}">
-                            @csrf
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Nama Siswa</label>
-                                    <input type="text" name="nama_siswa" class="form-control" placeholder="Nama siswa" value="{{ old('nama_siswa') }}" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Jurusan</label>
-                                    <select class="custom-select form-control" id="jurusan-select-buku" name="jurusan" required>
-                                        <option value="" disabled {{ old('jurusan') ? '' : 'selected' }}>Pilih jurusan</option>
-                                        @foreach ($jurusans as $jurusan)
-                                            <option value="{{ $jurusan }}" {{ old('jurusan') === $jurusan ? 'selected' : '' }}>{{ $jurusan }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Jenis Buku</label>
-                                    <select class="custom-select form-control" id="jenis-buku-select" name="jenis_buku" required>
-                                        <option value="" disabled {{ old('jenis_buku') ? '' : 'selected' }}>Pilih jenis buku</option>
-                                        @foreach ($jenisBukuOptions as $jenisBuku)
-                                            <option value="{{ $jenisBuku }}" {{ old('jenis_buku') === $jenisBuku ? 'selected' : '' }}>{{ $jenisBuku }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Jumlah Buku</label>
-                                    <input type="number" id="jumlah-buku-input" name="jumlah_buku" class="form-control" placeholder="Contoh: 3" value="{{ old('jumlah_buku', 1) }}" min="1" max="25" required>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Metode Pembayaran</label>
-                                    <select class="custom-select form-control" id="metode-pembayaran-select" name="metode_pembayaran" required>
-                                        <option value="" disabled {{ old('metode_pembayaran') ? '' : 'selected' }}>Pilih metode pembayaran</option>
-                                        @foreach ($paymentMethods as $code => $method)
-                                            <option value="{{ $code }}" {{ old('metode_pembayaran') === $code ? 'selected' : '' }}>{{ $method['label'] }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="price-box mb-3">
-                                <h6 class="mb-2">Estimasi Biaya</h6>
-                                <div class="price-line">
-                                    <span>Harga satuan buku</span>
-                                    <span>Rp {{ number_format($hargaSatuanBuku, 0, ',', '.') }}</span>
-                                </div>
-                                <div class="price-line mb-0">
-                                    <span>Total estimasi</span>
-                                    <span id="estimasi-total-buku">Rp 0</span>
-                                </div>
-                            </div>
-
-                            <div class="payment-box mb-3">
-                                <h6 class="mb-2">Tujuan Pembayaran</h6>
-                                <div class="payment-detail" id="payment-label">Metode: -</div>
-                                <div class="payment-detail" id="payment-account">Nomor Rekening / Nomor Wallet: -</div>
-                                <div class="payment-detail mb-0" id="payment-holder">Atas Nama: -</div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Semester / Kelas</label>
-                                    <input type="text" name="semester_kelas" class="form-control" placeholder="Contoh: X TKA 1" value="{{ old('semester_kelas') }}">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Catatan</label>
-                                <textarea class="form-control" name="catatan" rows="3" placeholder="Tulis catatan tambahan jika ada">{{ old('catatan') }}</textarea>
-                                <div class="form-hint">Tips: tulis detail mapel atau edisi buku agar tidak tertukar.</div>
-                                <div class="form-hint">Setelah disimpan, data buku juga otomatis masuk ke menu pembayaran.</div>
-                            </div>
-
-                            <div class="mb-2">
+            <div class="row">
+                <div class="col-12 mb-4 mb-lg-0">
+                    <div class="card content-card h-100">
+                        <div class="card-header py-3">
+                            <h5 class="card-title mb-0">Daftar Buku per Jurusan</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="buku-grid">
                                 @foreach ($jurusans as $jurusan)
-                                    <button type="button" class="major-pill js-major-pill-buku" data-major="{{ $jurusan }}">{{ $jurusan }}</button>
+                                    @php
+                                        $deskripsi = match ($jurusan) {
+                                            'Farmasi Klinis & Komunitas' => 'Paket buku farmasi untuk kebutuhan kelas dan praktik.',
+                                            'Asisten Keperawatan & Caregiver' => 'Buku pendukung untuk pembelajaran keperawatan dan layanan.',
+                                            'Teknik Kendaraan Ringan' => 'Buku teknik otomotif untuk materi inti dan latihan.',
+                                            'Teknik Komputer & Jaringan' => 'Buku jaringan, komputer, dan praktik laboratorium.',
+                                            default => 'Buku dasar dan pendukung untuk jurusan pilihan Anda.',
+                                        };
+
+                                        $hargaBuku = [
+                                            'Farmasi Klinis & Komunitas' => 25000,
+                                            'Asisten Keperawatan & Caregiver' => 25000,
+                                            'Teknik Kendaraan Ringan' => 25000,
+                                            'Teknik Komputer & Jaringan' => 25000,
+                                            'Teknik Sepeda Motor' => 25000,
+                                        ];
+                                    @endphp
+                                    <div class="buku-item">
+                                        <div class="buku-image">
+                                            <img src="{{ asset('image/contoh-buku-tka.svg') }}" alt="Buku {{ $jurusan }}">
+                                        </div>
+                                        <div class="buku-info">
+                                            <h6 class="buku-title">{{ $jurusan }}</h6>
+                                            <p class="buku-price">Rp {{ number_format($hargaBuku[$jurusan] ?? 25000, 0, ',', '.') }}</p>
+                                            <p class="buku-desc">{{ $deskripsi }}</p>
+                                        </div>
+                                        <a href="{{ route('backend.pemesanan.buku', ['jurusan' => $jurusan]) }}" class="btn btn-primary btn-order-buku w-100">Pesan Sekarang</a>
+                                    </div>
                                 @endforeach
                             </div>
-
-                            <div class="price-box mb-3">
-                                <h6 class="mb-2">Estimasi Biaya</h6>
-                                <div class="price-line">
-                                    <span>Harga satuan buku</span>
-                                    <span>Rp {{ number_format($hargaSatuanBuku, 0, ',', '.') }}</span>
-                                </div>
-                                <div class="price-line mb-0">
-                                    <span>Total estimasi</span>
-                                    <span id="estimasi-total-buku">Rp 0</span>
-                                </div>
-                            </div>
-
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary px-4">Pesan & Masuk Pembayaran</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5">
-                <div class="card content-card h-100 sticky-preview">
-                    <div class="card-header py-3">
-                        <h5 class="card-title mb-0">Contoh Buku per Jurusan</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="preview-grid">
-                            @foreach ($jurusans as $jurusan)
-                                <div class="product-preview js-major-card-buku" data-major="{{ $jurusan }}" role="button" tabindex="0">
-                                    <img src="{{ asset('image/contoh-buku-tka.svg') }}" alt="Contoh buku {{ $jurusan }}">
-                                    <div class="preview-body">
-                                        <h6 class="mb-1">{{ $jurusan }}</h6>
-                                        <p class="mb-2 text-muted">Contoh paket buku untuk membantu siswa memilih kebutuhan jurusannya.</p>
-                                        <span class="badge bg-success">Contoh Buku</span>
-                                    </div>
-                                </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>
+
+                <!-- Preview removed as requested -->
             </div>
-        </div>
         </div>
     </div>
 </div>
 
+<style>
+.order-page {
+    padding: 18px 16px 40px;
+}
+
+.page-hero-card {
+    border-radius: 12px;
+}
+
+.content-card {
+    border-radius: 12px;
+    overflow: visible;
+}
+
+.content-card .card-body {
+    padding: 20px;
+}
+
+.content-card .card-header {
+    padding: 12px 16px;
+}
+
+.buku-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.buku-item {
+    background: linear-gradient(135deg, #f5f3ff 0%, #faf5ff 100%);
+    border: 2px solid #e2d5f7;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+}
+
+.buku-item:hover {
+    border-color: #a855f7;
+    box-shadow: 0 8px 24px rgba(168, 85, 247, 0.15);
+    transform: translateY(-4px);
+}
+
+.buku-image {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+    padding: 18px;
+}
+
+.buku-image img {
+    max-width: 100%;
+    max-height: 112px;
+    object-fit: contain;
+}
+
+.buku-info {
+    padding: 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.buku-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2d1b4e;
+    margin-bottom: 8px;
+}
+
+.buku-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #a855f7;
+    margin-bottom: 8px;
+}
+
+.buku-desc {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 16px;
+    flex: 1;
+}
+
+.btn-order-buku {
+    margin-top: auto;
+    border-radius: 10px;
+    padding: 10px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 767px) {
+    .buku-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+    }
+
+    .buku-image {
+        height: 150px;
+    }
+
+    .buku-info {
+        padding: 16px;
+    }
+
+    .buku-title {
+        font-size: 14px;
+    }
+
+    .buku-price {
+        font-size: 17px;
+    }
+
+    .buku-desc {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 479px) {
+    .buku-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .buku-image {
+        height: 170px;
+    }
+}
+
+@media (min-width: 992px) {
+    .buku-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .buku-item {
+        grid-column: span 2;
+    }
+
+    .buku-item:nth-child(4) {
+        grid-column: 2 / span 2;
+    }
+
+    .buku-item:nth-child(5) {
+        grid-column: 4 / span 2;
+    }
+}
+</style>
+
 <script>
     (function() {
-        var jurusanSelect = document.getElementById('jurusan-select-buku');
-        if (!jurusanSelect) return;
-
-        var pills = document.querySelectorAll('.js-major-pill-buku');
-        var cards = document.querySelectorAll('.js-major-card-buku');
-        var jenisBukuSelect = document.getElementById('jenis-buku-select');
-        var jumlahBukuInput = document.getElementById('jumlah-buku-input');
-        var totalEl = document.getElementById('estimasi-total-buku');
-        var metodeSelect = document.getElementById('metode-pembayaran-select');
-        var paymentLabel = document.getElementById('payment-label');
-        var paymentAccount = document.getElementById('payment-account');
-        var paymentHolder = document.getElementById('payment-holder');
-        var hargaSatuanBuku = Number(@json($hargaSatuanBuku));
-        var paymentMethods = @json($paymentMethods);
-
-        function setJurusan(majorName) {
-            jurusanSelect.value = majorName;
-            pills.forEach(function(pill) {
-                pill.classList.toggle('is-active', pill.getAttribute('data-major') === majorName);
-            });
-            cards.forEach(function(card) {
-                card.classList.toggle('is-active', card.getAttribute('data-major') === majorName);
-            });
-        }
-
-        function formatRupiah(value) {
-            return new Intl.NumberFormat('id-ID').format(value);
-        }
-
-        function updateSummary() {
-            if (!totalEl) return;
-
-            var jumlah = Number(jumlahBukuInput && jumlahBukuInput.value ? jumlahBukuInput.value : 0);
-            var total = Math.max(jumlah, 0) * hargaSatuanBuku;
-
-            totalEl.textContent = 'Rp ' + formatRupiah(total);
-        }
-
-        function updatePaymentDetail() {
-            if (!metodeSelect) return;
-
-            var selected = metodeSelect.value;
-            var method = paymentMethods[selected] || null;
-
-            if (!method) {
-                paymentLabel.textContent = 'Metode: -';
-                paymentAccount.textContent = 'Nomor Rekening / Nomor Wallet: -';
-                paymentHolder.textContent = 'Atas Nama: -';
-                return;
-            }
-
-            paymentLabel.textContent = 'Metode: ' + method.label;
-            paymentAccount.textContent = 'Nomor Rekening / Nomor Wallet: ' + method.account;
-            paymentHolder.textContent = 'Atas Nama: ' + method.holder;
-        }
-
-        pills.forEach(function(pill) {
-            pill.addEventListener('click', function() {
-                setJurusan(this.getAttribute('data-major'));
-            });
-        });
-
-        cards.forEach(function(card) {
-            card.addEventListener('click', function() {
-                setJurusan(this.getAttribute('data-major'));
-            });
-            card.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    setJurusan(this.getAttribute('data-major'));
-                }
-            });
-        });
-
-        if (jurusanSelect.value) {
-            setJurusan(jurusanSelect.value);
-        }
-
-        if (jumlahBukuInput) {
-            jumlahBukuInput.addEventListener('input', updateSummary);
-        }
-
-        if (metodeSelect) {
-            metodeSelect.addEventListener('change', updatePaymentDetail);
-        }
-
-        if (jenisBukuSelect) {
-            jenisBukuSelect.addEventListener('change', updateSummary);
-        }
-
-        updateSummary();
-        updatePaymentDetail();
+        // Landing page for buku now mirrors the baju card grid.
     })();
 </script>
 @endsection

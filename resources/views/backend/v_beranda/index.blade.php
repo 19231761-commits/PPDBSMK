@@ -461,7 +461,7 @@
                                 </a>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pemesanan.buku') }}" class="quick-link" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                <a href="{{ route('backend.pemesanan.buku') }}" class="quick-link" style="background: linear-gradient(135deg, #5b21b6, #7c3aed);">
                                     <i class="mdi mdi-book-open-page-variant mr-1"></i> Pemesanan Buku
                                     <small>Lihat dan isi form buku yang dibutuhkan.</small>
                                 </a>
