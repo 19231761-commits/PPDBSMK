@@ -42,17 +42,17 @@
                 </li>
                 @endif
 
-                <li class="nav-item {{ Request::is('backend/pengumuman*') ? 'active' : '' }}">
-                    <a href="{{ route('backend.pengumuman.index') }}">
-                        <i class="mdi mdi-bell"></i>
-                        <span class="nav-label">Informasi</span>
-                    </a>
-                </li>
-
                 <li class="nav-item {{ Request::is('backend/pembayaransantri*') ? 'active' : '' }}">
                     <a href="{{ route('backend.pembayaransantri.index') }}">
                         <i class="mdi mdi-credit-card"></i>
                         <span class="nav-label">Pembayaran</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ Request::is('backend/pengumuman*') ? 'active' : '' }}">
+                    <a href="{{ route('backend.pengumuman.index') }}">
+                        <i class="mdi mdi-bell"></i>
+                        <span class="nav-label">Informasi</span>
                     </a>
                 </li>
 

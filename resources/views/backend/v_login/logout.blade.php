@@ -10,13 +10,13 @@
         :root {
             --bg-1: #0f172a;
             --bg-2: #7c3aed;
-            --bg-3: #0ea5e9;
+            --bg-3: #a855f7;
             --panel: rgba(255, 255, 255, 0.96);
             --text: #111827;
             --muted: #6b7280;
-            --primary: #4f46e5;
-            --primary-dark: #3730a3;
-            --good: #16a34a;
+            --primary: #7c3aed;
+            --primary-dark: #5b21b6;
+            --good: #7c3aed;
         }
 
         * {
@@ -29,9 +29,9 @@
             font-family: Arial, sans-serif;
             color: var(--text);
             background:
-                radial-gradient(circle at top left, rgba(14, 165, 233, 0.25), transparent 30%),
+                radial-gradient(circle at top left, rgba(168, 85, 247, 0.25), transparent 30%),
                 radial-gradient(circle at top right, rgba(124, 58, 237, 0.28), transparent 26%),
-                linear-gradient(135deg, var(--bg-1), var(--bg-2) 55%, #14532d 100%);
+                linear-gradient(135deg, var(--bg-1), var(--bg-2) 55%, #5b21b6 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,9 +71,9 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(22, 163, 74, 0.12);
+            background: rgba(124, 58, 237, 0.12);
             color: var(--good);
-            border: 1px solid rgba(22, 163, 74, 0.28);
+            border: 1px solid rgba(124, 58, 237, 0.28);
             border-radius: 999px;
             padding: 8px 14px;
             font-size: 13px;
@@ -104,13 +104,13 @@
             color: #fff;
             text-decoration: none;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            box-shadow: 0 16px 30px rgba(79, 70, 229, 0.28);
+            box-shadow: 0 16px 30px rgba(124, 58, 237, 0.28);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .cta:hover {
             transform: translateY(-1px);
-            box-shadow: 0 18px 34px rgba(79, 70, 229, 0.34);
+            box-shadow: 0 18px 34px rgba(124, 58, 237, 0.34);
         }
 
         .sub {

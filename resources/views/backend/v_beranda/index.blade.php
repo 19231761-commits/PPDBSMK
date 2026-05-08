@@ -11,11 +11,11 @@
     }
 
     .dashboard-wrap .page-hero.admin {
-        background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 55%, #7c3aed 100%);
+        background: linear-gradient(135deg, #0f172a 0%, #5b21b6 55%, #a855f7 100%);
     }
 
     .dashboard-wrap .page-hero.pendaftar {
-        background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 55%, #16a34a 100%);
+        background: linear-gradient(135deg, #0f172a 0%, #5b21b6 55%, #a855f7 100%);
     }
 
     .dashboard-wrap .page-hero .card-title,
@@ -32,8 +32,8 @@
     }
 
     .dashboard-wrap .soft-card .card-header {
-        background: linear-gradient(120deg, #eff6ff, #ecfdf5);
-        border-bottom: 1px solid #dbe7f5;
+        background: linear-gradient(120deg, #f5f3ff, #ede9fe);
+        border-bottom: 1px solid #e9d5ff;
         padding: 14px 18px;
     }
 
@@ -72,19 +72,19 @@
     }
 
     .dashboard-wrap .metric-card.primary {
-        border-left: 6px solid #1d4ed8;
+        border-left: 6px solid #7c3aed;
     }
 
     .dashboard-wrap .metric-card.info {
-        border-left: 6px solid #0ea5e9;
+        border-left: 6px solid #8b5cf6;
     }
 
     .dashboard-wrap .metric-card.success {
-        border-left: 6px solid #16a34a;
+        border-left: 6px solid #7c3aed;
     }
 
     .dashboard-wrap .metric-card.warning {
-        border-left: 6px solid #f59e0b;
+        border-left: 6px solid #a855f7;
     }
 
     .dashboard-wrap .status-badge {
@@ -100,11 +100,11 @@
     }
 
     .dashboard-wrap .status-ok {
-        background: linear-gradient(135deg, #16a34a, #22c55e);
+        background: linear-gradient(135deg, #7c3aed, #a855f7);
     }
 
     .dashboard-wrap .status-no {
-        background: linear-gradient(135deg, #dc2626, #ef4444);
+        background: linear-gradient(135deg, #5b21b6, #7c3aed);
     }
 
     .dashboard-wrap .action-link {
@@ -128,11 +128,11 @@
     }
 
     .dashboard-wrap .action-primary {
-        background: linear-gradient(135deg, #16a34a, #22c55e);
+        background: linear-gradient(135deg, #7c3aed, #a855f7);
     }
 
     .dashboard-wrap .action-info {
-        background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        background: linear-gradient(135deg, #6d28d9, #8b5cf6);
     }
 
     .dashboard-wrap .quick-link {
@@ -155,8 +155,8 @@
     }
 
     .dashboard-wrap .table thead th {
-        background: #eff6ff;
-        color: #0f172a;
+        background: #f5f3ff;
+        color: #4c1d95;
         font-weight: 800;
         border-top: 0;
     }
@@ -288,25 +288,25 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3 col-sm-6 mb-3">
-                                <a href="{{ route('backend.pendaftaransantri.index') }}" class="quick-link" style="background: linear-gradient(135deg, #1d4ed8, #7c3aed);">
+                                <a href="{{ route('backend.pendaftaransantri.index') }}" class="quick-link" style="background: linear-gradient(135deg, #6d28d9, #8b5cf6);">
                                     <i class="mdi mdi-account-box"></i> Data Pendaftaran
                                     <small>Lihat dan kelola seluruh pendaftar.</small>
                                 </a>
                             </div>
                             <div class="col-md-3 col-sm-6 mb-3">
-                                <a href="{{ route('backend.pembayaransantri.index') }}" class="quick-link" style="background: linear-gradient(135deg, #16a34a, #22c55e);">
+                                <a href="{{ route('backend.pembayaransantri.index') }}" class="quick-link" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">
                                     <i class="mdi mdi-credit-card"></i> Kelola Pembayaran
                                     <small>Monitor transaksi pembayaran siswa.</small>
                                 </a>
                             </div>
                             <div class="col-md-3 col-sm-6 mb-3">
-                                <a href="{{ route('backend.pengumuman.index') }}" class="quick-link" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                <a href="{{ route('backend.pengumuman.index') }}" class="quick-link" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">
                                     <i class="mdi mdi-bullhorn"></i> Kelola Informasi
                                     <small>Publikasikan pengumuman PPDB.</small>
                                 </a>
                             </div>
                             <div class="col-md-3 col-sm-6 mb-3">
-                                <a href="{{ route('backend.user.index') }}" class="quick-link" style="background: linear-gradient(135deg, #0ea5e9, #0369a1);">
+                                <a href="{{ route('backend.user.index') }}" class="quick-link" style="background: linear-gradient(135deg, #5b21b6, #7c3aed);">
                                     <i class="mdi mdi-account-multiple"></i> Kelola User
                                     <small>Atur akun admin dan pendaftar.</small>
                                 </a>
@@ -449,13 +449,13 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pendaftaran.form') }}" class="quick-link" style="background: linear-gradient(135deg, #16a34a, #22c55e);">
+                                <a href="{{ route('backend.pendaftaran.form') }}" class="quick-link" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">
                                     <i class="mdi mdi-account-plus mr-1"></i> Form Pendaftaran
                                     <small>Lengkapi data utama pendaftaran.</small>
                                 </a>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pemesanan.baju') }}" class="quick-link" style="background: linear-gradient(135deg, #1d4ed8, #7c3aed);">
+                                <a href="{{ route('backend.pemesanan.baju') }}" class="quick-link" style="background: linear-gradient(135deg, #6d28d9, #8b5cf6);">
                                     <i class="mdi mdi-tshirt-crew mr-1"></i> Pemesanan Baju
                                     <small>Isi form ukuran dan kebutuhan baju.</small>
                                 </a>
@@ -467,13 +467,13 @@
                                 </a>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pengumuman.index') }}" class="quick-link" style="background: linear-gradient(135deg, #0ea5e9, #0369a1);">
+                                <a href="{{ route('backend.pengumuman.index') }}" class="quick-link" style="background: linear-gradient(135deg, #5b21b6, #7c3aed);">
                                     <i class="mdi mdi-bell mr-1"></i> Informasi
                                     <small>Baca pengumuman terbaru dari sekolah.</small>
                                 </a>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <a href="{{ route('backend.pembayaransantri.index') }}" class="quick-link" style="background: linear-gradient(135deg, #0f766e, #14b8a6);">
+                                <a href="{{ route('backend.pembayaransantri.index') }}" class="quick-link" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">
                                     <i class="mdi mdi-credit-card mr-1"></i> Pembayaran
                                     <small>Pantau riwayat dan status pembayaran.</small>
                                 </a>

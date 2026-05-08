@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <style>
         .ppdb-form-wrap .hero-card {
-            background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 55%, #0ea5e9 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #5b21b6 55%, #a855f7 100%);
             color: #fff;
             border: 1px solid #dbe7ff;
             border-radius: 14px;
@@ -33,10 +33,10 @@
         }
 
         .ppdb-form-wrap .section-head {
-            background: linear-gradient(120deg, #e0f2fe, #ecfdf5);
+            background: linear-gradient(120deg, #f5f3ff, #ede9fe);
             padding: 12px 16px;
             font-weight: 700;
-            border-bottom: 1px solid #dbe7ff;
+            border-bottom: 1px solid #e9d5ff;
             border-radius: 14px 14px 0 0;
         }
 

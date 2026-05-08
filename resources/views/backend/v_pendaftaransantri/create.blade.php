@@ -12,7 +12,7 @@
     }
 
     .ppdb-form-wrap .hero-card {
-        background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 55%, #0ea5e9 100%);
+        background: linear-gradient(135deg, #0f172a 0%, #5b21b6 55%, #a855f7 100%);
         color: #fff;
     }
 
@@ -27,10 +27,10 @@
     }
 
     .ppdb-form-wrap .section-head {
-        background: linear-gradient(120deg, #eff6ff, #ecfdf5);
+        background: linear-gradient(120deg, #f5f3ff, #ede9fe);
         padding: 14px 18px;
         font-weight: 800;
-        border-bottom: 1px solid #dbe7f5;
+        border-bottom: 1px solid #e9d5ff;
     }
 
     .ppdb-form-wrap .section-body {
@@ -67,8 +67,8 @@
     .ppdb-form-wrap .form-control:focus,
     .ppdb-form-wrap .custom-select:focus,
     .ppdb-form-wrap textarea:focus {
-        border-color: rgba(14, 165, 233, 0.7);
-        box-shadow: 0 0 0 0.2rem rgba(14, 165, 233, 0.12);
+        border-color: rgba(124, 58, 237, 0.7);
+        box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.12);
     }
 
     .ppdb-form-wrap label {
