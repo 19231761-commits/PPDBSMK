@@ -10,13 +10,24 @@ use Illuminate\View\View;
 
 class PemesananBajuController extends Controller
 {
-    public function create(): View
+    public function create(Request $request): View
     {
         $paymentMethods = $this->paymentMethods();
+        $jurusans = $this->jurusans();
+        $selectedJurusan = $request->query('jurusan');
+
+        if ($selectedJurusan && in_array($selectedJurusan, $jurusans, true)) {
+            return view('backend.v_pemesanan_baju.form', [
+                'judul' => 'Form Pemesanan Baju',
+                'jurusans' => $jurusans,
+                'paymentMethods' => $paymentMethods,
+                'selectedJurusan' => $selectedJurusan,
+            ]);
+        }
 
         return view('backend.v_pemesanan_baju.index', [
-            'judul' => 'Form Pemesanan Baju',
-            'jurusans' => $this->jurusans(),
+            'judul' => 'Pemesanan Baju',
+            'jurusans' => $jurusans,
             'paymentMethods' => $paymentMethods,
         ]);
     }
@@ -27,6 +38,7 @@ class PemesananBajuController extends Controller
 
         $validated = $request->validate([
             'nama_siswa' => ['required', 'string', 'max:120'],
+            'jenis_kelamin' => ['required', 'string', 'in:Laki-laki,Perempuan'],
             'jurusan' => ['required', 'string', 'in:' . implode(',', $this->jurusans())],
             'ukuran_baju' => ['required', 'string', 'in:S,M,L,XL,XXL'],
             'jumlah_pesanan' => ['required', 'integer', 'min:1', 'max:10'],
@@ -41,6 +53,7 @@ class PemesananBajuController extends Controller
         PemesananBaju::create([
             'user_id' => $request->user()->id,
             'nama_siswa' => $validated['nama_siswa'],
+            'jenis_kelamin' => $validated['jenis_kelamin'],
             'jurusan' => $validated['jurusan'],
             'ukuran_baju' => $validated['ukuran_baju'],
             'jumlah_pesanan' => $validated['jumlah_pesanan'],

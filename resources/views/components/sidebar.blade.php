@@ -2,7 +2,15 @@
     <div class="sidebar-inner">
         <div class="brand">
             <img src="{{ asset('backend/images/logoo_remove.png') }}" alt="Logo" class="brand-logo">
-            <div class="brand-title">PPDB SMK Sehati Karawang</div>
+            <div class="brand-copy">
+                <div class="brand-title">PPDB SMK Sehati Karawang</div>
+                <div class="brand-subtitle">Sistem pendaftaran online</div>
+            </div>
+
+        </div>
+
+        <div class="sidebar-tagline">
+            {{ Auth::user()->role === 'admin_ppdb' ? 'Panel kontrol admin' : 'Panel pendaftar' }}
         </div>
 
         <nav class="nav-main">
@@ -59,3 +67,4 @@
         </nav>
     </div>
 </aside>
+<!-- collapse button removed as requested -->

@@ -10,7 +10,9 @@ return new class extends Migration
         DB::table('users')->where('role', 'admin')->update(['role' => 'admin_ppdb']);
         DB::table('users')->where('role', 'pemilik')->update(['role' => 'pendaftar']);
 
-        DB::statement("ALTER TABLE users MODIFY role ENUM('admin_ppdb','pendaftar') NOT NULL DEFAULT 'pendaftar'");
+        if (DB::connection()->getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE users MODIFY role ENUM('admin_ppdb','pendaftar') NOT NULL DEFAULT 'pendaftar'");
+        }
     }
 
     public function down(): void
@@ -18,6 +20,8 @@ return new class extends Migration
         DB::table('users')->where('role', 'admin_ppdb')->update(['role' => 'admin']);
         DB::table('users')->where('role', 'pendaftar')->update(['role' => 'pemilik']);
 
-        DB::statement("ALTER TABLE users MODIFY role ENUM('admin','pemilik') NOT NULL DEFAULT 'pemilik'");
+        if (DB::connection()->getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE users MODIFY role ENUM('admin','pemilik') NOT NULL DEFAULT 'pemilik'");
+        }
     }
 };

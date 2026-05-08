@@ -28,23 +28,8 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            // Role-based redirect
-            switch ($user->role) {
-                case 'pendaftar':
-                    // Redirect pendaftar ke form pendaftaran
-                    return redirect()->route('backend.pendaftaran.form')
-                        ->with('success', 'Selamat datang ' . $user->name . '! Silakan lengkapi form pendaftaran.');
-                
-                case 'admin_ppdb':
-                    // Redirect admin PPDB ke dashboard admin
-                    return redirect()->route('backend.beranda')
-                        ->with('success', 'Selamat datang Admin! Anda masuk sebagai Admin PPDB.');
-                
-                default:
-                    // Default redirect ke beranda
-                    return redirect()->route('backend.beranda')
-                        ->with('success', 'Login berhasil!');
-            }
+            return redirect()->route('backend.beranda')
+                ->with('success', 'Selamat datang ' . $user->name . '!');
         }
 
         return back()

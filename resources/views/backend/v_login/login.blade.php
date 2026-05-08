@@ -86,10 +86,14 @@
                     </div>
 
                     <button class="btn btn-primary btn-block btn-lg" type="submit">Masuk ke Dashboard</button>
+
+                    <a href="{{ route('backend.register') }}" class="btn btn-block btn-lg auth-register mt-3">
+                        Daftar Akun Baru
+                    </a>
                 </form>
 
                 <div class="mt-4 small text-muted text-center">
-                    Dengan login, Anda dapat melanjutkan proses pendaftaran dan memantau status terbaru secara real-time.
+                    Belum punya akun? Klik tombol daftar di atas.
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="id">
 
 <head>
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/logoo.jpg') }}">
-    <title>PPDB SMK Sehati Karawang</title>
+    <title>{{ $judul ?? 'PPDB SMK Sehati Karawang' }}</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/extra-libs/multicheck/multicheck.css') }}">
     <link href="{{ asset('backend/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
@@ -16,7 +16,7 @@
     <link href="{{ asset('backend/dist/css/custom-dashboard.css') }}" rel="stylesheet">
 </head>
 
-<body class="saas-dashboard">
+<body class="saas-dashboard dashboard-shell">
     @include('components.sidebar')
 
     <div class="app-content">
@@ -26,7 +26,7 @@
             @yield('content')
         </main>
 
-        <footer class="footer text-center">
+        <footer class="footer text-center app-footer">
             PPDB <a href="https://www.facebook.com/share/18KeVCwhbX/"> SMK Sehati Karawang</a>
         </footer>
     </div>
@@ -43,7 +43,13 @@
     <script src="{{ asset('backend/extra-libs/DataTables/datatables.min.js') }}"></script>
     <script>
         if (window.jQuery && $('#zero_config').length) {
-            $('#zero_config').DataTable();
+            var $table = $('#zero_config');
+            var hasColspanEmptyRow = $table.find('tbody td[colspan]').length > 0;
+            var hasDataRows = $table.find('tbody tr').length > 0 && $table.find('tbody tr:not(:has(td[colspan]))').length > 0;
+
+            if (hasDataRows && !hasColspanEmptyRow) {
+                $table.DataTable();
+            }
         }
     </script>
 
@@ -52,16 +58,6 @@
     </form>
 
     <script src="{{ asset('sweetalert/sweetalert2.all.min.js') }}"></script>
-
-    @if (session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: "{{ session('success') }}"
-        });
-    </script>
-    @endif
 
     <script>
         $('.show_confirm').click(function(event) {

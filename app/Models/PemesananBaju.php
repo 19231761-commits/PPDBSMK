@@ -14,6 +14,7 @@ class PemesananBaju extends Model
     protected $fillable = [
         'user_id',
         'nama_siswa',
+        'jenis_kelamin',
         'jurusan',
         'ukuran_baju',
         'jumlah_pesanan',
