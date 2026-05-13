@@ -296,7 +296,7 @@
         <div class="auth-left">
             <div class="auth-hero">
                 <div class="mb-4">
-                    <img src="{{ asset('backend/images/logoo.jpg') }}" alt="Logo" class="auth-logo mb-3">
+                    <img src="{{ asset('image/logo_login.png') }}" alt="Logo" class="auth-logo mb-3">
                     <h1 class="h2 font-weight-bold text-white mb-3">PPDB SMK Sehati Karawang</h1>
                     <p class="text-white-50 mb-0" style="line-height: 1.8;">Platform pendaftaran siswa baru dengan pengalaman seperti aplikasi startup: cepat, rapi, dan jelas untuk pendaftar maupun admin sekolah.</p>
                 </div>

@@ -715,7 +715,7 @@
             <div class="col-12 mb-4 brochure-print-area">
                 <div class="brochure-card">
                         <div class="brochure-print-header">
-                            <img src="{{ asset('backend/images/logoo.jpg') }}" alt="Logo SMK Sehati Karawang">
+                            <img src="{{ asset('image/logo_brosur.png') }}" alt="Logo SMK Sehati Karawang">
                             <div>
                                 <div class="print-title">Brosur PPDB SMK Sehati Karawang</div>
                                 <div class="print-subtitle">Tahun Pelajaran 2025/2026</div>

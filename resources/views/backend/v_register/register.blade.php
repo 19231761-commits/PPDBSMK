@@ -147,7 +147,7 @@
                 <div class="auth-left">
                     <div class="auth-hero">
                         <div class="auth-brand-slim">
-                            <img class="auth-logo" src="{{ asset('backend/images/logoo.jpg') }}" alt="Logo">
+                            <img class="auth-logo" src="{{ asset('image/logo_pendaftaran.png') }}" alt="Logo">
                             <div>
                                 <div class="auth-kicker">PPDB</div>
                                 <h1>SMK Sehati Karawang</h1>

@@ -1,7 +1,7 @@
 <aside class="app-sidebar">
     <div class="sidebar-inner">
         <div class="brand">
-            <img src="{{ asset('backend/images/logoo_remove.png') }}" alt="Logo" class="brand-logo">
+            <img src="{{ asset('image/logo_sidebar.png') }}" alt="Logo" class="brand-logo">
             <div class="brand-copy">
                 <div class="brand-title">PPDB SMK Sehati Karawang</div>
                 <div class="brand-subtitle">Sistem pendaftaran online</div>
