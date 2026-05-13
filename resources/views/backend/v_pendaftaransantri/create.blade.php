@@ -12,7 +12,7 @@
     }
 
     .ppdb-form-wrap .hero-card {
-        background: linear-gradient(135deg, #0f172a 0%, #5b21b6 55%, #a855f7 100%);
+        background: #6d28d9;
         color: #fff;
     }
 
@@ -37,22 +37,24 @@
         padding: 18px;
     }
 
-    .ppdb-form-wrap .section-body .row {
-        display: block;
-        margin-left: 0;
-        margin-right: 0;
-    }
+    @media (max-width: 767.98px) {
+        .ppdb-form-wrap .section-body .row {
+            display: block;
+            margin-left: 0;
+            margin-right: 0;
+        }
 
-    .ppdb-form-wrap .section-body .row > [class*="col-"] {
-        width: 100%;
-        max-width: 100%;
-        flex: 0 0 100%;
-        padding-left: 0;
-        padding-right: 0;
-    }
+        .ppdb-form-wrap .section-body .row > [class*="col-"] {
+            width: 100%;
+            max-width: 100%;
+            flex: 0 0 100%;
+            padding-left: 0;
+            padding-right: 0;
+        }
 
-    .ppdb-form-wrap .section-body .row > [class*="col-"]:not(:last-child) {
-        margin-bottom: 16px;
+        .ppdb-form-wrap .section-body .row > [class*="col-"]:not(:last-child) {
+            margin-bottom: 12px;
+        }
     }
 
     .ppdb-form-wrap .form-control,
@@ -84,8 +86,8 @@
     }
 
     .ppdb-form-wrap .badge-info {
-        background: rgba(255, 255, 255, 0.16);
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.22);
     }
 
     .ppdb-form-wrap .help-text {
@@ -120,7 +122,6 @@
                             <h4 class="card-title mb-2">{{ $judul }}</h4>
                             <p class="mb-0 help-text">Isi data dengan benar dan lengkap.</p>
                         </div>
-                        <span class="badge badge-info mt-3 mt-md-0 px-3 py-2">ID: {{ old('id_santri', $id_santri_default) }}</span>
                     </div>
                 </div>
 
@@ -138,23 +139,23 @@
                                 <input type="text" name="no_nisn" value="{{ old('no_nisn') }}" class="form-control @error('no_nisn') is-invalid @enderror" placeholder="10 digit">
                                 @error('no_nisn') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-12 col-md-6 form-group">
                                 <label>NIK</label>
                                 <input type="text" name="no_nik" value="{{ old('no_nik') }}" class="form-control @error('no_nik') is-invalid @enderror" placeholder="16 digit">
                                 @error('no_nik') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-12 col-md-6 form-group">
                                 <label>Tempat lahir</label>
                                 <input type="text" name="tempat_lahir" value="{{ old('tempat_lahir') }}" class="form-control @error('tempat_lahir') is-invalid @enderror" placeholder="Kota lahir">
                                 @error('tempat_lahir') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-12 col-md-6 form-group">
                                 <label>Tanggal lahir</label>
                                 <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="form-control @error('tanggal_lahir') is-invalid @enderror">
                                 @error('tanggal_lahir') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-12 col-md-6 form-group">
                                 <label>Jenis kelamin</label>
                                 <select name="jenis_kelamin" class="custom-select form-control @error('jenis_kelamin') is-invalid @enderror">
                                     <option value="">- Pilih Jenis Kelamin -</option>
@@ -164,9 +165,17 @@
                                 @error('jenis_kelamin') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-12 col-md-6 form-group">
                                 <label>Agama</label>
-                                <input type="text" name="agama" value="{{ old('agama') }}" class="form-control @error('agama') is-invalid @enderror" placeholder="Masukkan agama">
+                                <select name="agama" class="custom-select form-control @error('agama') is-invalid @enderror">
+                                    <option value="">- Pilih Agama -</option>
+                                    <option value="Islam" {{ old('agama') == 'Islam' ? 'selected' : '' }}>Islam</option>
+                                    <option value="Kristen" {{ old('agama') == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                                    <option value="Katolik" {{ old('agama') == 'Katolik' ? 'selected' : '' }}>Katolik</option>
+                                    <option value="Hindu" {{ old('agama') == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                                    <option value="Buddha" {{ old('agama') == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                                    <option value="Konghucu" {{ old('agama') == 'Konghucu' ? 'selected' : '' }}>Konghucu</option>
+                                </select>
                                 @error('agama') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                             <div class="col-md-12 form-group form-span-2">
@@ -328,9 +337,9 @@
                 <div class="card mb-4" style="border: 1px solid #dbe7f5; border-radius: 18px; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);">
                     <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
                         <div class="text-muted mb-3 mb-md-0">Periksa kembali semua data sebelum disimpan.</div>
-                        <div>
-                            <button type="submit" class="btn btn-primary mr-2">Simpan Pendaftaran</button>
-                            <a href="{{ route(Auth::user()->role == 'admin_ppdb' ? 'backend.pendaftaransantri.index' : 'backend.pendaftaran.form') }}" class="btn btn-secondary">Kembali</a>
+                        <div class="d-flex flex-column flex-md-row gap-2 w-100 mt-3 mt-md-0">
+                            <button type="submit" class="btn btn-primary w-100 w-md-auto">Simpan</button>
+                            <a href="{{ route(Auth::user()->role == 'admin_ppdb' ? 'backend.pendaftaransantri.index' : 'backend.pendaftaran.form') }}" class="btn btn-secondary w-100 w-md-auto">Kembali</a>
                         </div>
                     </div>
                 </div>

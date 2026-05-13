@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/extra-libs/multicheck/multicheck.css') }}">
     <link href="{{ asset('backend/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/dist/css/style.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/dist/css/custom-dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/dist/css/custom-dashboard.css') }}?v={{ filemtime(public_path('backend/dist/css/custom-dashboard.css')) }}" rel="stylesheet">
 </head>
 
 <body class="saas-dashboard dashboard-shell">
@@ -26,9 +26,6 @@
             @yield('content')
         </main>
 
-        <footer class="footer text-center app-footer">
-            PPDB <a href="https://www.facebook.com/share/18KeVCwhbX/"> SMK Sehati Karawang</a>
-        </footer>
     </div>
 
     <script src="{{ asset('backend/libs/jquery/dist/jquery.min.js') }}"></script>

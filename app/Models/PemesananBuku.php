@@ -15,6 +15,7 @@ class PemesananBuku extends Model
         'kode_pemesanan',
         'user_id',
         'nama_siswa',
+        'jenis_kelamin',
         'jurusan',
         'jenis_buku',
         'semester_kelas',

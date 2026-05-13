@@ -38,9 +38,9 @@ class PemesananBajuController extends Controller
 
         $validated = $request->validate([
             'nama_siswa' => ['required', 'string', 'max:120'],
-            'jenis_kelamin' => ['required', 'string', 'in:Laki-laki,Perempuan'],
+            'jenis_kelamin' => ['required', 'string', 'in:Laki-Laki,Perempuan'],
             'jurusan' => ['required', 'string', 'in:' . implode(',', $this->jurusans())],
-            'ukuran_baju' => ['required', 'string', 'in:S,M,L,XL,XXL'],
+            'ukuran_baju' => ['required', 'string', 'max:50'],
             'jumlah_pesanan' => ['required', 'integer', 'min:1', 'max:10'],
             'metode_pembayaran' => ['required', 'string', 'in:' . implode(',', array_keys($paymentMethods))],
             'warna_keterangan' => ['nullable', 'string', 'max:150'],
@@ -126,22 +126,23 @@ class PemesananBajuController extends Controller
     private function hargaSatuanContoh(string $jurusan, string $ukuranBaju): int
     {
         $hargaJurusan = [
-            'Farmasi Klinis & Komunitas' => 180000,
-            'Asisten Keperawatan & Caregiver' => 182000,
-            'Teknik Komputer & Jaringan' => 190000,
-            'Teknik Sepeda Motor' => 188000,
-            'Teknik Kendaraan Ringan' => 192000,
+            'Farmasi Klinis & Komunitas' => 1200000,
+            'Asisten Keperawatan & Caregiver' => 1200000,
+            'Teknik Komputer & Jaringan' => 1200000,
+            'Teknik Sepeda Motor' => 1200000,
+            'Teknik Kendaraan Ringan' => 1200000,
         ];
 
         $tambahanUkuran = [
             'S' => 0,
-            'M' => 5000,
-            'L' => 10000,
-            'XL' => 15000,
-            'XXL' => 20000,
+            'M' => 0,
+            'L' => 0,
+            'XL' => 0,
+            'XXL' => 0,
+            'Lainnya' => 0,
         ];
 
-        $hargaDasar = $hargaJurusan[$jurusan] ?? 175000;
+        $hargaDasar = $hargaJurusan[$jurusan] ?? 1200000;
         $biayaUkuran = $tambahanUkuran[$ukuranBaju] ?? 0;
 
         return $hargaDasar + $biayaUkuran;

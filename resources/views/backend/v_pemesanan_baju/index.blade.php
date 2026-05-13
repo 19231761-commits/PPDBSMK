@@ -11,19 +11,20 @@
     ];
 
     $hargaJurusan = [
-        'Farmasi Klinis & Komunitas' => 180000,
-        'Asisten Keperawatan & Caregiver' => 182000,
-        'Teknik Komputer & Jaringan' => 190000,
-        'Teknik Sepeda Motor' => 188000,
-        'Teknik Kendaraan Ringan' => 192000,
+        'Farmasi Klinis & Komunitas' => 1200000,
+        'Asisten Keperawatan & Caregiver' => 1200000,
+        'Teknik Komputer & Jaringan' => 1200000,
+        'Teknik Sepeda Motor' => 1200000,
+        'Teknik Kendaraan Ringan' => 1200000,
     ];
 
     $tambahanUkuran = [
         'S' => 0,
-        'M' => 5000,
-        'L' => 10000,
-        'XL' => 15000,
-        'XXL' => 20000,
+        'M' => 0,
+        'L' => 0,
+        'XL' => 0,
+        'XXL' => 0,
+        'Lainnya' => 0,
     ];
 
     $paymentMethods = $paymentMethods ?? [
@@ -49,7 +50,6 @@
                         <h4 class="card-title mb-2" id="hero-title">Pemesanan Baju Seragam SMK Sehati</h4>
                         <p id="hero-desc" class="mb-0 text-white-50">Klik salah satu baju di bawah untuk melanjutkan ke formulir pemesanan.</p>
                     </div>
-                    <span id="hero-badge" class="badge bg-secondary mt-3 mt-md-0">5 Jurusan Tersedia</span>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                                             <p class="baju-price">Rp {{ number_format($hargaJurusan[$jurusan], 0, ',', '.') }}</p>
                                             <p class="baju-desc">Seragam resmi {{ $jurusan }}</p>
                                         </div>
-                                        <a href="{{ route('backend.pemesanan.baju', ['jurusan' => $jurusan]) }}" class="btn btn-primary btn-order-baju w-100">Pesan Sekarang</a>
+                                        <a href="{{ route('backend.pemesanan.baju', ['jurusan' => $jurusan]) }}" class="btn btn-primary btn-order-baju w-100">Pilih</a>
                                     </div>
                                 @endforeach
                             </div>
@@ -95,6 +95,32 @@
 
 .page-hero-card {
     border-radius: 12px;
+    background: #6d28d9;
+    color: #fff;
+    overflow: hidden;
+    border: 0;
+    box-shadow: 0 18px 34px rgba(15, 23, 42, 0.12);
+}
+
+.page-hero-card .card-title,
+.page-hero-card p,
+.page-hero-card .hero-note {
+    color: #fff;
+}
+
+.page-hero-card .hero-note {
+    letter-spacing: 0.06em;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    opacity: 0.86;
+}
+
+.page-hero-card .badge {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    color: #fff !important;
+    font-weight: 700;
 }
 
 .content-card {

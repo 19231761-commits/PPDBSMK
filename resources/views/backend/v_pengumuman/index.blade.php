@@ -1,23 +1,58 @@
 @extends('backend.v_layout.app')
 
 @section('content')
-<div class="container-fluid">
+<style>
+    .announcement-page .page-hero-card {
+        border: 0;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #6d28d9;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.18);
+    }
+
+    .announcement-page .page-hero-card .hero-body,
+    .announcement-page .page-hero-card .hero-body * {
+        color: #fff !important;
+    }
+
+    .announcement-page .page-hero-card .hero-note {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .announcement-page .page-hero-card .card-title {
+        color: #fff !important;
+    }
+
+    .announcement-page .page-hero-card .hero-desc {
+        color: rgba(255, 255, 255, 0.84) !important;
+    }
+
+    .announcement-page .page-hero-card .btn-outline-light {
+        background: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.24);
+        color: #fff !important;
+        font-weight: 700;
+    }
+
+    .announcement-page .page-hero-card .btn-outline-light:hover {
+        background: rgba(255, 255, 255, 0.24);
+        color: #fff !important;
+    }
+</style>
+
+<div class="container-fluid announcement-page">
     <div class="row">
         <div class="col-12">
-            <div class="card soft-card mb-4">
-                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+            <div class="card soft-card mb-4 page-hero-card">
+                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center hero-body">
                     <div>
-                        <div class="text-uppercase text-primary font-weight-bold mb-2" style="letter-spacing: 0.06em; font-size: 12px;">Selamat datang di halaman informasi PPDB</div>
+                        <div class="hero-note mb-2">Selamat datang di halaman informasi PPDB</div>
                         <h4 class="card-title mb-2">{{ $judul }}</h4>
-                        <p class="mb-0 text-muted">Atur informasi dan pengumuman PPDB dengan tampilan yang lebih rapi.</p>
-                    </div>
-                    <div class="mt-3 mt-md-0">
-                        <a href="{{ route('backend.pengumuman.create') }}" class="btn btn-purple mr-2 mb-2 mb-md-0">
-                            <i class="fas fa-plus"></i> Tambah Pengumuman
-                        </a>
-                        <a href="{{ route('backend.pengumuman.export-teks') }}" class="btn btn-danger mb-2 mb-md-0">
-                            <i class="fas fa-file-pdf"></i> Unduh PDF
-                        </a>
+                        <p class="mb-0 hero-desc">Atur informasi dan pengumuman PPDB dengan tampilan yang lebih rapi.</p>
                     </div>
                 </div>
             </div>

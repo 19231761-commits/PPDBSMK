@@ -19,8 +19,11 @@ class Pembayaransantri extends Model
         'jenis_pembayaran',
         'tanggal_pembayaran',
         'nama_santri',
+        'jenis_kelamin',
+        'jurusan',
         'atas_nama',
         'nama_bank',
+        'bukti_pembayaran',
         'jumlah_pembayaran',
         'status_pembayaran',
     ];  

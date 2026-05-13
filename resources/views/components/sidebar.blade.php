@@ -9,10 +9,6 @@
 
         </div>
 
-        <div class="sidebar-tagline">
-            {{ Auth::user()->role === 'admin_ppdb' ? 'Panel kontrol admin' : 'Panel pendaftar' }}
-        </div>
-
         <nav class="nav-main">
             <ul>
                 <li class="nav-item {{ Request::is('backend/beranda*') ? 'active' : '' }}">
@@ -25,7 +21,7 @@
                 <li class="nav-item {{ Request::is('backend/pendaftaran*') ? 'active' : '' }}">
                     <a href="{{ route('backend.pendaftaran.form') }}">
                         <i class="mdi mdi-account-plus"></i>
-                        <span class="nav-label">Pendaftaran Saya</span>
+                        <span class="nav-label">Form Pendaftaran</span>
                     </a>
                 </li>
                 <li class="nav-item {{ Request::is('backend/form-pemesanan-baju*') ? 'active' : '' }}">

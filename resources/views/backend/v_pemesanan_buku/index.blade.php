@@ -21,7 +21,6 @@
                         <h4 class="card-title mb-2">Pemesanan Buku Jurusan SMK Sehati</h4>
                         <p class="mb-0 text-white-50">Klik salah satu buku di bawah untuk melanjutkan ke formulir pemesanan.</p>
                     </div>
-                    <span class="book-badge mt-3 mt-md-0">5 Jurusan Tersedia</span>
                 </div>
             </div>
 
@@ -44,11 +43,11 @@
                                         };
 
                                         $hargaBuku = [
-                                            'Farmasi Klinis & Komunitas' => 25000,
-                                            'Asisten Keperawatan & Caregiver' => 25000,
-                                            'Teknik Kendaraan Ringan' => 25000,
-                                            'Teknik Komputer & Jaringan' => 25000,
-                                            'Teknik Sepeda Motor' => 25000,
+                                            'Farmasi Klinis & Komunitas' => 550000,
+                                            'Asisten Keperawatan & Caregiver' => 550000,
+                                            'Teknik Kendaraan Ringan' => 550000,
+                                            'Teknik Komputer & Jaringan' => 550000,
+                                            'Teknik Sepeda Motor' => 550000,
                                         ];
                                     @endphp
                                     <div class="buku-item">
@@ -60,7 +59,7 @@
                                             <p class="buku-price">Rp {{ number_format($hargaBuku[$jurusan] ?? 25000, 0, ',', '.') }}</p>
                                             <p class="buku-desc">{{ $deskripsi }}</p>
                                         </div>
-                                        <a href="{{ route('backend.pemesanan.buku', ['jurusan' => $jurusan]) }}" class="btn btn-primary btn-order-buku w-100">Pesan Sekarang</a>
+                                        <a href="{{ route('backend.pemesanan.buku', ['jurusan' => $jurusan]) }}" class="btn btn-primary btn-order-buku w-100">Pilih</a>
                                     </div>
                                 @endforeach
                             </div>
@@ -81,6 +80,32 @@
 
 .page-hero-card {
     border-radius: 12px;
+}
+
+.page-hero-card .card-body,
+.page-hero-card .card-body * {
+    color: #fff !important;
+}
+
+.page-hero-card .hero-note {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.page-hero-card .card-title,
+.page-hero-card p {
+    color: #fff !important;
+}
+
+.page-hero-card .text-white-50 {
+    color: rgba(255, 255, 255, 0.84) !important;
+}
+
+.page-hero-card .book-badge {
+    display: none !important;
 }
 
 .content-card {
@@ -170,19 +195,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-}
-
-.book-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 767px) {

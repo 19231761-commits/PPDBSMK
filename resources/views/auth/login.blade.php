@@ -6,36 +6,149 @@
     <title>Login - PPDB SMK Sehati Karawang</title>
     <link href="{{ asset('backend/dist/css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/dist/css/custom-dashboard.css') }}" rel="stylesheet">
+    <style>
+        .auth-contact {
+            margin-top: 14px;
+            padding: 12px 14px;
+            border: 1px solid #dbe7f5;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+        }
+
+        .auth-contact .auth-contact-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .auth-contact .auth-contact-title i {
+            color: #7c3aed;
+            font-size: 18px;
+        }
+
+        .auth-contact .auth-contact-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .auth-contact .auth-contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            color: #334155;
+            font-size: 13px;
+        }
+
+        .auth-contact .auth-contact-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .auth-contact .auth-contact-list i {
+            color: #7c3aed;
+            font-size: 16px;
+            flex: 0 0 auto;
+        }
+
+        .auth-panel-title {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        .auth-panel-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 10px 0 0;
+            max-width: 420px;
+            line-height: 1.7;
+        }
+
+        .auth-brand-slim {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .auth-brand-slim h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.15;
+        }
+
+        .auth-brand-slim .auth-kicker {
+            margin-bottom: 2px;
+        }
+
+        .auth-hero-callout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .auth-callout {
+            padding: 16px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #fff;
+            text-align: center;
+        }
+
+        .auth-callout strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .auth-callout span {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 991px) {
+            .auth-contact {
+                margin-top: 14px;
+            }
+        }
+    </style>
 </head>
 <body class="auth-page">
     <div class="auth-wrap">
         <div class="auth-left">
             <div class="auth-hero">
-                <div class="auth-brand">
+                <div class="auth-brand-slim">
                     <img src="{{ asset('backend/images/logoo.jpg') }}" alt="Logo SMK Sehati" class="auth-logo">
                     <div>
-                        <div class="auth-kicker">PPDB Online</div>
+                        <div class="auth-kicker">PPDB</div>
                         <h1>SMK Sehati Karawang</h1>
                     </div>
                 </div>
 
-                <p class="auth-lead">
-                    Pendaftaran siswa baru yang rapi, cepat, dan mudah dipantau dari satu dashboard.
-                </p>
+                <h2 class="auth-panel-title">Pendaftaran siswa baru yang rapi, cepat, dan mudah dipantau.</h2>
+                <p class="auth-panel-subtitle">Gunakan akun yang sudah terdaftar untuk masuk ke dashboard PPDB dan melanjutkan proses pendaftaran tanpa ribet.</p>
 
                 <div class="auth-feature-grid">
                     <div class="auth-feature">
                         <i class="mdi mdi-account-check-outline"></i>
                         <div>
                             <strong>Alur Jelas</strong>
-                            <span>Daftar, unggah berkas, dan cek status tanpa bingung.</span>
+                            <span>Daftar, unggah berkas, dan cek status dengan mudah.</span>
                         </div>
                     </div>
                     <div class="auth-feature">
                         <i class="mdi mdi-shield-check-outline"></i>
                         <div>
                             <strong>Akses Aman</strong>
-                            <span>Role admin dan pendaftar dipisahkan dengan rapi.</span>
+                            <span>Role admin dan pendaftar dipisahkan dengan aman.</span>
                         </div>
                     </div>
                     <div class="auth-feature">
@@ -47,18 +160,18 @@
                     </div>
                 </div>
 
-                <div class="auth-stats">
-                    <div class="auth-stat">
-                        <strong>1x</strong>
-                        <span>Login untuk semua proses</span>
+                <div class="auth-hero-callout">
+                    <div class="auth-callout">
+                        <strong>Alur Terarah</strong>
+                        <span>Data diri, berkas, dan pembayaran dalam satu alur.</span>
                     </div>
-                    <div class="auth-stat">
-                        <strong>24/7</strong>
-                        <span>Akses dashboard</span>
+                    <div class="auth-callout">
+                        <strong>Dashboard Terpusat</strong>
+                        <span>Pantau status pendaftaran dan informasi sekolah.</span>
                     </div>
-                    <div class="auth-stat">
-                        <strong>Real-time</strong>
-                        <span>Status pendaftaran</span>
+                    <div class="auth-callout">
+                        <strong>Contact Person</strong>
+                        <span>Siap membantu jika ada kendala login.</span>
                     </div>
                 </div>
             </div>
@@ -69,6 +182,18 @@
                     <div class="auth-pill">Akses Sistem</div>
                     <h3 class="mb-2">Masuk ke akun Anda</h3>
                     <p class="text-muted mb-0">Gunakan email dan password yang sudah terdaftar.</p>
+
+                    <div class="auth-contact">
+                        <div class="auth-contact-title">
+                            <i class="mdi mdi-headset"></i>
+                            <span>Hubungi Contact Person</span>
+                        </div>
+                        <ul class="auth-contact-list">
+                            <li><i class="mdi mdi-whatsapp"></i> WhatsApp: 082211445533</li>
+                            <li><i class="mdi mdi-phone"></i> Telp: 082211445533</li>
+                            <li><i class="mdi mdi-email-outline"></i> Email: ppdb@smksehatikarawang</li>
+                        </ul>
+                    </div>
                 </div>
 
                 @if(session('error'))

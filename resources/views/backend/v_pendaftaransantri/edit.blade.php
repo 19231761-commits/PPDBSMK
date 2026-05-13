@@ -84,33 +84,45 @@
                     <div class="section-head">1. Data Diri</div>
                     <div class="section-body">
                         <div class="row">
-                            <div class="col-md-6 form-group"><label>ID Siswa</label><input type="text" name="id_santri" value="{{ old('id_santri', $edit->id_santri) }}" class="form-control @error('id_santri') is-invalid @enderror">@error('id_santri') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Tanggal pendaftaran</label><input type="date" name="tgl_pendaftaran" value="{{ old('tgl_pendaftaran', $edit->tgl_pendaftaran) }}" class="form-control @error('tgl_pendaftaran') is-invalid @enderror">@error('tgl_pendaftaran') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Nama lengkap</label><input type="text" name="nama_santri" value="{{ old('nama_santri', $edit->nama_santri) }}" class="form-control @error('nama_santri') is-invalid @enderror">@error('nama_santri') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>ID Siswa</label><input type="text" name="id_santri" value="{{ old('id_santri', $edit->id_santri) }}" class="form-control @error('id_santri') is-invalid @enderror">@error('id_santri') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Tanggal pendaftaran</label><input type="date" name="tgl_pendaftaran" value="{{ old('tgl_pendaftaran', $edit->tgl_pendaftaran) }}" class="form-control @error('tgl_pendaftaran') is-invalid @enderror">@error('tgl_pendaftaran') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Nama lengkap</label><input type="text" name="nama_santri" value="{{ old('nama_santri', $edit->nama_santri) }}" class="form-control @error('nama_santri') is-invalid @enderror">@error('nama_santri') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
 
-                            <div class="col-md-6 form-group"><label>NISN</label><input type="text" name="no_nisn" value="{{ old('no_nisn', $edit->no_nisn) }}" class="form-control @error('no_nisn') is-invalid @enderror">@error('no_nisn') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>NIK (Opsional)</label><input type="text" name="no_nik" value="{{ old('no_nik', $edit->no_nik) }}" class="form-control @error('no_nik') is-invalid @enderror">@error('no_nik') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Tempat lahir</label><input type="text" name="tempat_lahir" value="{{ old('tempat_lahir', $edit->tempat_lahir) }}" class="form-control @error('tempat_lahir') is-invalid @enderror">@error('tempat_lahir') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Tanggal lahir</label><input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', $edit->tanggal_lahir) }}" class="form-control @error('tanggal_lahir') is-invalid @enderror">@error('tanggal_lahir') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>NISN</label><input type="text" name="no_nisn" value="{{ old('no_nisn', $edit->no_nisn) }}" class="form-control @error('no_nisn') is-invalid @enderror">@error('no_nisn') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>NIK (Opsional)</label><input type="text" name="no_nik" value="{{ old('no_nik', $edit->no_nik) }}" class="form-control @error('no_nik') is-invalid @enderror">@error('no_nik') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Tempat lahir</label><input type="text" name="tempat_lahir" value="{{ old('tempat_lahir', $edit->tempat_lahir) }}" class="form-control @error('tempat_lahir') is-invalid @enderror">@error('tempat_lahir') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Tanggal lahir</label><input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', $edit->tanggal_lahir) }}" class="form-control @error('tanggal_lahir') is-invalid @enderror">@error('tanggal_lahir') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
 
-                            <div class="col-md-6 form-group"><label>Jenis kelamin</label>
+                            <div class="col-12 col-md-6 form-group"><label>Jenis kelamin</label>
                                 <select name="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
                                     <option value="Laki-Laki" {{ old('jenis_kelamin', $edit->jenis_kelamin) == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
                                     <option value="Perempuan" {{ old('jenis_kelamin', $edit->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                 </select>
                                 @error('jenis_kelamin') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
-                            <div class="col-md-6 form-group"><label>Agama</label><input type="text" name="agama" value="{{ old('agama', $edit->agama) }}" class="form-control @error('agama') is-invalid @enderror">@error('agama') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>No HP siswa</label><input type="text" name="no_hp_siswa" value="{{ old('no_hp_siswa', $edit->no_hp_siswa) }}" class="form-control @error('no_hp_siswa') is-invalid @enderror">@error('no_hp_siswa') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Email</label><input type="email" name="email" value="{{ old('email', $edit->email) }}" class="form-control @error('email') is-invalid @enderror">@error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group">
+                                <label>Agama</label>
+                                <select name="agama" class="custom-select form-control @error('agama') is-invalid @enderror">
+                                    <option value="">- Pilih Agama -</option>
+                                    <option value="Islam" {{ old('agama', $edit->agama) == 'Islam' ? 'selected' : '' }}>Islam</option>
+                                    <option value="Kristen" {{ old('agama', $edit->agama) == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                                    <option value="Katolik" {{ old('agama', $edit->agama) == 'Katolik' ? 'selected' : '' }}>Katolik</option>
+                                    <option value="Hindu" {{ old('agama', $edit->agama) == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                                    <option value="Buddha" {{ old('agama', $edit->agama) == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                                    <option value="Konghucu" {{ old('agama', $edit->agama) == 'Konghucu' ? 'selected' : '' }}>Konghucu</option>
+                                </select>
+                                @error('agama') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="col-12 col-md-6 form-group"><label>No HP siswa</label><input type="text" name="no_hp_siswa" value="{{ old('no_hp_siswa', $edit->no_hp_siswa) }}" class="form-control @error('no_hp_siswa') is-invalid @enderror">@error('no_hp_siswa') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Email</label><input type="email" name="email" value="{{ old('email', $edit->email) }}" class="form-control @error('email') is-invalid @enderror">@error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
 
                             <div class="col-md-12 form-group form-span-2"><label>Alamat lengkap</label><textarea name="alamat_lengkap" rows="2" class="form-control @error('alamat_lengkap') is-invalid @enderror">{{ old('alamat_lengkap', $edit->alamat_lengkap) }}</textarea>@error('alamat_lengkap') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>RT/RW</label><input type="text" name="rt_rw" value="{{ old('rt_rw', $edit->rt_rw) }}" class="form-control @error('rt_rw') is-invalid @enderror">@error('rt_rw') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Desa/Kelurahan</label><input type="text" name="desa_kelurahan" value="{{ old('desa_kelurahan', $edit->desa_kelurahan) }}" class="form-control @error('desa_kelurahan') is-invalid @enderror">@error('desa_kelurahan') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Kecamatan</label><input type="text" name="kecamatan" value="{{ old('kecamatan', $edit->kecamatan) }}" class="form-control @error('kecamatan') is-invalid @enderror">@error('kecamatan') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Kota/Kabupaten</label><input type="text" name="kota_kabupaten" value="{{ old('kota_kabupaten', $edit->kota_kabupaten) }}" class="form-control @error('kota_kabupaten') is-invalid @enderror">@error('kota_kabupaten') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Provinsi</label><input type="text" name="provinsi" value="{{ old('provinsi', $edit->provinsi) }}" class="form-control @error('provinsi') is-invalid @enderror">@error('provinsi') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
-                            <div class="col-md-6 form-group"><label>Kode pos</label><input type="text" name="kode_pos" value="{{ old('kode_pos', $edit->kode_pos) }}" class="form-control @error('kode_pos') is-invalid @enderror">@error('kode_pos') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>RT/RW</label><input type="text" name="rt_rw" value="{{ old('rt_rw', $edit->rt_rw) }}" class="form-control @error('rt_rw') is-invalid @enderror">@error('rt_rw') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Desa/Kelurahan</label><input type="text" name="desa_kelurahan" value="{{ old('desa_kelurahan', $edit->desa_kelurahan) }}" class="form-control @error('desa_kelurahan') is-invalid @enderror">@error('desa_kelurahan') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Kecamatan</label><input type="text" name="kecamatan" value="{{ old('kecamatan', $edit->kecamatan) }}" class="form-control @error('kecamatan') is-invalid @enderror">@error('kecamatan') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Kota/Kabupaten</label><input type="text" name="kota_kabupaten" value="{{ old('kota_kabupaten', $edit->kota_kabupaten) }}" class="form-control @error('kota_kabupaten') is-invalid @enderror">@error('kota_kabupaten') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Provinsi</label><input type="text" name="provinsi" value="{{ old('provinsi', $edit->provinsi) }}" class="form-control @error('provinsi') is-invalid @enderror">@error('provinsi') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
+                            <div class="col-12 col-md-6 form-group"><label>Kode pos</label><input type="text" name="kode_pos" value="{{ old('kode_pos', $edit->kode_pos) }}" class="form-control @error('kode_pos') is-invalid @enderror">@error('kode_pos') <div class="invalid-feedback">{{ $message }}</div> @enderror</div>
                         </div>
                     </div>
                 </div>
@@ -188,9 +200,9 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-body">
-                        <button type="submit" class="btn btn-primary">Perbarui Data</button>
-                        <a href="{{ route('backend.pendaftaransantri.index') }}" class="btn btn-secondary">Kembali</a>
+                    <div class="card-body d-flex flex-column flex-md-row gap-2 justify-content-end w-100 mt-3 mt-md-0">
+                        <button type="submit" class="btn btn-primary w-100 w-md-auto">Perbarui Data</button>
+                        <a href="{{ route('backend.pendaftaransantri.index') }}" class="btn btn-secondary w-100 w-md-auto">Kembali</a>
                     </div>
                 </div>
             </form>

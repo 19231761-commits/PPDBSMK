@@ -48,7 +48,6 @@
                 <th>Id Pembayaran</th>
                 <th>Id Siswa</th>
                 <th>Jenis Pembayaran</th>
-                <th>Tanggal Pembayaran</th>
                 <th>Nama Siswa</th>
                 <th>Atas Nama</th>
                 <th>Nama Bank</th>
@@ -62,7 +61,6 @@
                 <td>{{ $row->id_pembayaran }}</td>
                 <td>{{ $row->id_santri }}</td>
                 <td>{{ $row->jenis_pembayaran }}</td>
-                <td>{{ $row->tanggal_pembayaran }}</td>
                 <td>{{ $row->nama_santri }}</td>
                 <td>{{ $row->atas_nama }}</td>
                 <td>{{ $row->nama_bank }}</td>
