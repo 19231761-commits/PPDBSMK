@@ -5,16 +5,18 @@
     <div class="row">
         <div class="col-12">
             <div class="card soft-card mb-4">
-                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
-                    <div>
-                        <div class="text-uppercase text-primary font-weight-bold mb-2" style="letter-spacing: 0.06em; font-size: 12px;">Manajemen Pendaftaran</div>
-                        <h4 class="card-title mb-2">{{ $judul }}</h4>
-                        <p class="mb-0 text-muted">Lihat daftar siswa yang telah mengisi formulir pendaftaran terorganisir per jurusan pilihan.</p>
-                    </div>
-                    <div class="mt-3 mt-md-0">
-                        <a href="{{ route('backend.pendaftaransantri.index') }}" class="btn btn-outline-purple mb-2 mb-md-0">
-                            <i class="fas fa-list"></i> Lihat Semua Data
-                        </a>
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start">
+                        <div class="mb-3 mb-md-0">
+                            <div class="text-uppercase text-primary font-weight-bold mb-2" style="letter-spacing: 0.06em; font-size: 12px;">Manajemen Pendaftaran</div>
+                            <h4 class="card-title mb-2">{{ $judul }}</h4>
+                            <p class="mb-0 text-muted">Lihat daftar siswa yang telah mengisi formulir pendaftaran terorganisir per jurusan pilihan.</p>
+                        </div>
+                        <div class="mt-0">
+                            <a href="{{ route('backend.pendaftaransantri.index') }}" class="btn btn-outline-purple mb-2 mb-md-0">
+                                <i class="fas fa-list"></i> Lihat Semua Data
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,43 +30,31 @@
                     </div>
                 </div>
             @else
-                <!-- Filter Jurusan -->
-                <div class="card soft-card mb-4">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-md-6">
-                                <label class="font-weight-bold text-muted" style="font-size: 13px; letter-spacing: 0.05em;">FILTER BERDASARKAN JURUSAN</label>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <select id="filterJurusan" class="form-control" style="border-color: #d1d5db;">
-                                    <option value="">-- Semua Jurusan --</option>
-                                    @foreach($dataPerJurusan as $jurusan => $siswa)
-                                        <option value="{{ $jurusan }}">{{ $jurusan }} ({{ $siswa->count() }} siswa)</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="card soft-card jurusan-dashboard-card">
+                    <div class="card-body p-0">
+                        <ul class="nav nav-tabs jurusan-tabs" id="jurusanTab" role="tablist">
+                            @foreach($dataPerJurusan as $jurusan => $siswa)
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="jurusan-{{ $loop->iteration }}-tab" data-toggle="tab" href="#jurusan-{{ $loop->iteration }}" role="tab" aria-controls="jurusan-{{ $loop->iteration }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}">
+                                        <span class="d-flex align-items-center">
+                                            <span class="mr-2">{{ $jurusan }}</span>
+                                            <span class="badge badge-purple badge-pill">{{ $siswa->count() }}</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
 
-                <div class="accordion" id="accordionJurusan">
-                    @foreach($dataPerJurusan as $jurusan => $siswa)
-                        <div class="card soft-card mb-3 jurusan-card">
-                            <span class="jurusan-name-hidden" style="display:none;">{{ $jurusan }}</span>
-                            <div class="card-header p-0" id="heading{{ $loop->iteration }}">
-                                <button class="btn btn-link btn-block text-left p-4" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->iteration }}" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="collapse{{ $loop->iteration }}">
-                                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <div class="tab-content jurusan-tab-content" id="jurusanTabContent">
+                            @foreach($dataPerJurusan as $jurusan => $siswa)
+                                <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="jurusan-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="jurusan-{{ $loop->iteration }}-tab">
+                                    <div class="jurusan-panel-header">
                                         <div>
                                             <h5 class="mb-1">{{ $jurusan }}</h5>
-                                            <small class="text-muted">{{ $siswa->count() }} siswa terdaftar</small>
+                                            <p class="mb-0 text-muted">{{ $siswa->count() }} siswa terdaftar</p>
                                         </div>
-                                        <span class="badge badge-purple badge-pill" style="font-size: 16px; padding: 6px 12px;">{{ $siswa->count() }}</span>
                                     </div>
-                                </button>
-                            </div>
 
-                            <div id="collapse{{ $loop->iteration }}" class="collapse {{ $loop->first ? 'show' : '' }}" aria-labelledby="heading{{ $loop->iteration }}" data-parent="#accordionJurusan">
-                                <div class="card-body p-0">
                                     <div class="table-responsive">
                                         <table class="table table-hover mb-0">
                                             <thead>
@@ -122,9 +112,9 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
                 </div>
             @endif
         </div>
@@ -149,84 +139,123 @@
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    .btn-icon {
-        width: 36px;
-        height: 36px;
+    .jurusan-dashboard-card {
+        overflow: hidden;
+    }
+
+    .jurusan-tabs {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0 16px;
+        border-bottom: 1px solid #e5e7eb;
+        background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+        gap: 8px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+
+    .jurusan-tabs .nav-item {
+        margin-bottom: -1px;
+        flex: 0 0 auto;
+        list-style: none;
+    }
+
+    .jurusan-tabs .nav-link {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        padding: 0;
+        border: 1px solid transparent;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        color: #4b5563;
+        font-weight: 600;
+        padding: 14px 18px;
+        transition: all 0.18s ease;
+        text-decoration: none;
+        white-space: nowrap;
     }
 
-    .card-header {
-        background-color: #f9fafb;
-        border-bottom: 1px solid #e5e7eb;
+    .jurusan-tabs .nav-link:hover {
+        color: #111827;
+        background-color: #f7f5ff;
+        border-color: #ece7ff;
     }
 
-    .btn-link {
-        color: inherit !important;
-        text-decoration: none !important;
-        transition: background-color 0.2s ease;
+    .jurusan-tabs .nav-link.active {
+        color: #7c3aed;
+        background-color: #fff;
+        border-color: #e5e7eb #e5e7eb #fff;
+        box-shadow: 0 -1px 0 #fff;
     }
 
-    .btn-link:hover {
-        background-color: #f3f4f6;
+    .jurusan-tabs .badge {
+        box-shadow: 0 6px 16px rgba(124, 58, 237, 0.16);
     }
 
-    .btn-link[aria-expanded="true"] {
-        background-color: #f0f4ff;
+    .jurusan-tab-content {
+        padding: 20px 20px 8px;
+        background: #fff;
     }
 
-    .table-hover tbody tr:hover {
-        background-color: #f9fafb;
+    .jurusan-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 14px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #eceef3;
+    }
+
+    .jurusan-panel-header h5 {
+        margin-bottom: 4px;
+        font-size: 1.05rem;
+        font-weight: 700;
+    }
+
+    .jurusan-panel-header p {
+        font-size: 13px;
+    }
+
+    .jurusan-tab-content .table-responsive {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .jurusan-tab-content .table {
+        margin-bottom: 0;
+    }
+
+    .jurusan-tab-content .table thead th {
+        font-size: 12px;
+        font-weight: 700;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        border-top: 0;
+    }
+
+    .jurusan-tab-content .table tbody td {
+        vertical-align: middle;
     }
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const filterJurusanSelect = document.getElementById('filterJurusan');
-        const jurusanCards = document.querySelectorAll('.jurusan-card');
-        const urlParams = new URLSearchParams(window.location.search);
-        const jurusanFromUrl = urlParams.get('jurusan');
+        const params = new URLSearchParams(window.location.search);
+        const jurusanFromUrl = params.get('jurusan');
 
-        // Function to filter cards
-        function filterCards(selectedValue) {
-            jurusanCards.forEach(card => {
-                const jurusanName = card.querySelector('.jurusan-name-hidden').textContent;
-                if (selectedValue === '' || selectedValue === jurusanName) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
+        if (jurusanFromUrl && window.jQuery) {
+            const matchingTab = Array.from(document.querySelectorAll('#jurusanTab .nav-link')).find(link => {
+                const text = link.textContent.replace(/\s+/g, ' ').trim().toLowerCase();
+                return text.includes(jurusanFromUrl.toLowerCase());
             });
+
+            if (matchingTab) {
+                window.jQuery(matchingTab).tab('show');
+            }
         }
-
-        // Set initial filter based on URL parameter
-        if (jurusanFromUrl) {
-            filterJurusanSelect.value = jurusanFromUrl;
-            filterCards(jurusanFromUrl);
-        }
-
-        // Filter functionality on change
-        filterJurusanSelect.addEventListener('change', function() {
-            const selectedValue = this.value;
-            filterCards(selectedValue);
-            
-            // Update URL without reloading
-            const newUrl = window.location.pathname + (selectedValue ? '?jurusan=' + encodeURIComponent(selectedValue) : '');
-            window.history.pushState({path: newUrl}, '', newUrl);
-        });
-
-        // Tambah konfirmasi delete jika ada button delete
-        const confirmButtons = document.querySelectorAll('.show_confirm');
-        confirmButtons.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const name = this.getAttribute('data-konf-delete');
-                if (!confirm(`Yakin ingin menghapus data ${name}?`)) {
-                    e.preventDefault();
-                }
-            });
-        });
     });
 </script>
 @endsection
