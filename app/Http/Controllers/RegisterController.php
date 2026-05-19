@@ -22,7 +22,7 @@ class RegisterController extends Controller
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'hp' => 'required|digits_between:10,13',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|confirmed',
         ]);
 
         $user = User::create([

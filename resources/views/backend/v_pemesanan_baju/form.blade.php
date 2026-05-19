@@ -35,12 +35,12 @@
                             <form action="{{ route('backend.pemesanan.baju.store') }}" method="POST" class="row g-3">
                                 @csrf
 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12">
                                     <label for="nama-siswa" class="form-label">Nama</label>
                                     <input type="text" class="form-control" id="nama-siswa" name="nama_siswa" value="{{ old('nama_siswa') }}" placeholder="Masukkan nama lengkap" required>
                                 </div>
 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12">
                                     <label for="jenis-kelamin" class="form-label">Jenis Kelamin</label>
                                     <select class="custom-select form-control @error('jenis_kelamin') is-invalid @enderror" id="jenis-kelamin" name="jenis_kelamin" required>
                                         <option value="">- Pilih Jenis Kelamin -</option>
@@ -50,12 +50,12 @@
                                     @error('jenis_kelamin') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12">
                                     <label for="jurusan-input" class="form-label">Jurusan</label>
                                     <input type="text" class="form-control" id="jurusan-input" name="jurusan" value="{{ old('jurusan', $selectedJurusan) }}" readonly required>
                                 </div>
 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12">
                                     <label for="ukuran-baju" class="form-label">Ukuran</label>
                                     <select class="custom-select form-control @error('ukuran_baju') is-invalid @enderror" id="ukuran-select" name="ukuran_baju" required>
                                         <option value="">- Pilih Ukuran -</option>

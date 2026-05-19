@@ -1,0 +1,11 @@
+@extends('backend.v_layout.app')
+
+@section('content')
+<!-- Backup of original index.blade.php -->
+<!-- Created automatically before temporary minimal rewrite to diagnose Blade parse errors. -->
+
+@php
+// Original file backed up.
+@endphp
+
+@endsection

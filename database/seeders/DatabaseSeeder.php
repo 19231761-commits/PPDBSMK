@@ -29,5 +29,8 @@ class DatabaseSeeder extends Seeder
                 'phone' => '081234567891',
             ]
         );
+
+        // Run SiswaSeeder to create 125 students with accounts
+        $this->call(SiswaSeeder::class);
     }
 }

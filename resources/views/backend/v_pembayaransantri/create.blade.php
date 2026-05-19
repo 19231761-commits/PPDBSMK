@@ -246,10 +246,7 @@
         font-weight: 700;
         color: #5b21b6;
     }
-    font-weight: 700;
-    color: #1a202c;
-    margin-bottom: 0 !important;
-}
+    
 
 .form-label {
     font-weight: 600;

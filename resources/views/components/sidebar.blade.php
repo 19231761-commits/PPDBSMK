@@ -21,22 +21,21 @@
                 <li class="nav-item {{ Request::is('backend/pendaftaran*') ? 'active' : '' }}">
                     <a href="{{ route('backend.pendaftaran.form') }}">
                         <i class="mdi mdi-account-plus"></i>
-                        <span class="nav-label">Form Pendaftaran</span>
+                        <span class="nav-label">Form Pendaftaran Siswa</span>
                     </a>
                 </li>
                 <li class="nav-item {{ Request::is('backend/form-pemesanan-baju*') ? 'active' : '' }}">
                     <a href="{{ route('backend.pemesanan.baju') }}">
                         <i class="mdi mdi-tshirt-crew"></i>
-                        <span class="nav-label">Pemesanan Baju</span>
+                        <span class="nav-label">Form Pemesanan Seragam</span>
                     </a>
                 </li>
                 <li class="nav-item {{ Request::is('backend/form-pemesanan-buku*') ? 'active' : '' }}">
                     <a href="{{ route('backend.pemesanan.buku') }}">
                         <i class="mdi mdi-book-open-page-variant"></i>
-                        <span class="nav-label">Pemesanan Buku</span>
+                        <span class="nav-label">Form Pemesanan Buku</span>
                     </a>
                 </li>
-                @endif
 
                 <li class="nav-item {{ Request::is('backend/pembayaransantri*') ? 'active' : '' }}">
                     <a href="{{ route('backend.pembayaransantri.index') }}">
@@ -51,6 +50,40 @@
                         <span class="nav-label">Informasi</span>
                     </a>
                 </li>
+                @elseif(Auth::user()->role == 'admin_ppdb')
+                <li class="nav-item {{ Request::is('backend/pendaftaran*') ? 'active' : '' }}">
+                    <a href="{{ route('backend.pendaftaran.kelola') }}">
+                        <i class="mdi mdi-account-multiple"></i>
+                        <span class="nav-label">Kelola Pendaftaran</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ Request::is('backend/form-pemesanan-baju*') ? 'active' : '' }}">
+                    <a href="{{ route('backend.pemesanan.baju') }}">
+                        <i class="mdi mdi-tshirt-crew"></i>
+                        <span class="nav-label">Kelola Pemesanan Seragam</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ Request::is('backend/form-pemesanan-buku*') ? 'active' : '' }}">
+                    <a href="{{ route('backend.pemesanan.buku') }}">
+                        <i class="mdi mdi-book-open-page-variant"></i>
+                        <span class="nav-label">Kelola Pemesanan Buku</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ Request::is('backend/pembayaransantri*') ? 'active' : '' }}">
+                    <a href="{{ route('backend.pembayaransantri.index') }}">
+                        <i class="mdi mdi-credit-card"></i>
+                        <span class="nav-label">Kelola Pembayaran</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ Request::is('backend/pengumuman*') ? 'active' : '' }}">
+                    <a href="{{ route('backend.pengumuman.index') }}">
+                        <i class="mdi mdi-bell"></i>
+                        <span class="nav-label">Kelola Pengumuman</span>
+                    </a>
+                </li>
+                @endif
 
                 <li class="nav-item">
                     <a href="{{ route('backend.v_login.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

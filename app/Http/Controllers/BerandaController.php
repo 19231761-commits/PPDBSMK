@@ -20,8 +20,15 @@ class BerandaController extends Controller
             $totalPembayaran = Pembayaransantri::sum('jumlah_pembayaran');
             $transaksiHariIni = Pembayaransantri::whereDate('tanggal_pembayaran', today())->count();
             
-            $recentPendaftar = PendaftaranSantri::latest('tgl_pendaftaran')->take(10)->get();
+            $pendaftaranTerbaru = PendaftaranSantri::latest('tgl_pendaftaran')->take(10)->get();
             
+            // Data untuk badge per jurusan
+            $pendaftarPerJurusan = PendaftaranSantri::select('pilihan_jurusan_1', \DB::raw('count(*) as total'))
+                                                    ->whereNotNull('pilihan_jurusan_1')
+                                                    ->groupBy('pilihan_jurusan_1')
+                                                    ->orderBy('total', 'desc')
+                                                    ->get();
+
             return view('backend.v_beranda.index', [
                 'judul' => 'Dashboard Admin PPDB',
                 'role' => 'admin',
@@ -29,7 +36,8 @@ class BerandaController extends Controller
                 'pendaftarHariIni' => $pendaftarHariIni,
                 'totalPembayaran' => $totalPembayaran,
                 'transaksiHariIni' => $transaksiHariIni,
-                'recentPendaftar' => $recentPendaftar,
+                'pendaftaranTerbaru' => $pendaftaranTerbaru,
+                'pendaftarPerJurusan' => $pendaftarPerJurusan,
             ]);
         } else {
             // Dashboard Pendaftar

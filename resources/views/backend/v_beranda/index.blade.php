@@ -553,6 +553,15 @@
 </style>
 
 <div class="container-fluid dashboard-wrap">
+    @php
+        $recentPendaftar = $recentPendaftar ?? collect();
+        $totalPendaftar = $totalPendaftar ?? 0;
+        $pendaftarHariIni = $pendaftarHariIni ?? 0;
+        $totalPembayaran = $totalPembayaran ?? 0;
+        $transaksiHariIni = $transaksiHariIni ?? 0;
+        $user = $user ?? Auth::user();
+        $role = $role ?? ($user->role ?? 'pendaftar');
+    @endphp
     @if($role === 'admin')
         <div class="card page-hero mb-4">
             <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
@@ -735,9 +744,7 @@
                                         <p class="font-weight-bold mb-1">PENDAFTARAN OFFLINE:</p>
                                             <p>Datang langsung ke sekretariat PPDB SMK Sehati Karawang.</p>
                                             <ol class="mb-2">
-                                                <li>Membayar biaya pendaftaran Rp 250.000.</li>
-                                                <li>Membayar Pembayaran Baju Rp 1.200.000</li>
-                                                <li>Membayar Pembayaran Buku Rp 550.000</li>
+                                            
                                             </ol>
                                             <p class="font-weight-bold mb-1">PENDAFTARAN ONLINE:</p>
                                             <p class="mb-0">Link pendaftaran online:<br><a href="https://ppdb.smksehatikarawang" target="_blank" rel="noopener noreferrer">https://ppdb.smksehatikarawang</a></p>

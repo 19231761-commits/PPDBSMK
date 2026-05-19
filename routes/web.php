@@ -41,8 +41,20 @@ Route::resource('backend/user', UserController::class, ['as' => 'backend'])
 Route::resource('backend/pendaftaransantri', PendaftaranSantriController::class, ['as' => 'backend'])
     ->middleware('auth');
 
+// Route untuk Pemesanan Baju
+Route::resource('backend/pemesananbaju', PemesananBajuController::class, ['as' => 'backend'])
+    ->middleware('auth');
+
+// Route untuk Pemesanan Buku
+Route::resource('backend/pemesananbuku', PemesananBukuController::class, ['as' => 'backend'])
+    ->middleware('auth');
+
 Route::get('backend/pendaftaran-saya', [PendaftaranSantriController::class, 'create'])
     ->name('backend.pendaftaran.form')
+    ->middleware('auth');
+
+Route::get('backend/pendaftaran/kelola-per-jurusan', [PendaftaranSantriController::class, 'kelolaPerJurusan'])
+    ->name('backend.pendaftaran.kelola')
     ->middleware('auth');
 
 Route::get('backend/form-pemesanan-baju', [PemesananBajuController::class, 'create'])

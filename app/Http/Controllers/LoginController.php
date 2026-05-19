@@ -10,7 +10,7 @@ class LoginController extends Controller
     // Tampilkan halaman login
     public function loginBackend()
     {
-        return view('backend.v_login.login', [
+        return view('auth.login', [
             'judul' => 'Login PPDB',
         ]);
     }

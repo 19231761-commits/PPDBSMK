@@ -38,6 +38,25 @@ class PendaftaranSantriController extends Controller
         ]);
     }
 
+    public function kelolaPerJurusan()
+    {
+        $this->ensureAdmin();
+        
+        // Ambil semua data pendaftaran yang sudah diisi (memiliki pilihan jurusan)
+        $allPendaftaran = PendaftaranSantri::whereNotNull('pilihan_jurusan_1')
+                                           ->orderBy('pilihan_jurusan_1')
+                                           ->orderBy('nama_santri')
+                                           ->get();
+        
+        // Kelompokkan per jurusan berdasarkan pilihan_jurusan_1
+        $dataPerJurusan = $allPendaftaran->groupBy('pilihan_jurusan_1');
+        
+        return view('backend.v_pendaftaransantri.kelola_per_jurusan', [
+            'judul' => 'Kelola Pendaftaran per Jurusan',
+            'dataPerJurusan' => $dataPerJurusan,
+        ]);
+    }
+
 //create
     public function create()
     {

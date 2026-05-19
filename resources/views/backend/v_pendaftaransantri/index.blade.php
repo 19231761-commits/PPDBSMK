@@ -21,6 +21,36 @@
                     </div>
                 </div>
             </div>
+            <!-- Rincian Biaya (di bawah brosur) -->
+            <div class="card soft-card mb-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Rincian Biaya</h5>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>Pendaftaran</td>
+                                    <td class="text-end">Rp {{ number_format(250000, 0, ',', '.') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pembayaran Baju</td>
+                                    <td class="text-end">Rp {{ number_format(1200000, 0, ',', '.') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pembayaran Buku</td>
+                                    <td class="text-end">Rp {{ number_format(550000, 0, ',', '.') }}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total</th>
+                                    <th class="text-end">Rp {{ number_format(250000 + 1200000 + 550000, 0, ',', '.') }}</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             <div class="card soft-card">
                 <div class="card-body">
