@@ -1,0 +1,131 @@
+/* UI overrides for improved user list appearance */
+
+/* Table container */
+.table-responsive {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(108, 63, 255, 0.06);
+  padding: 8px;
+}
+
+/* Head styling */
+.table thead th {
+  background: linear-gradient(180deg, #f6f7fb 0%, #fbfbfd 100%);
+  border-bottom: 0;
+  color: #6b6b7a;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 18px 20px;
+}
+
+/* Spacious rows */
+.table tbody td {
+  padding: 18px 16px;
+  vertical-align: middle;
+  border-top: 0;
+  background: transparent;
+}
+
+.table tbody tr + tr td {
+  border-top: 1px solid rgba(230,230,240,0.8);
+}
+
+/* Name prominence */
+.table tbody td.font-weight-bold {
+  font-size: 20px;
+  color: #0b1320;
+  font-weight: 400 !important;
+}
+
+/* Make ID badge subtle */
+.badge.bg-purple {
+  background-color: #f0e9ff !important;
+  color: #6b3be6 !important;
+  font-weight: 600;
+}
+
+/* Action buttons as rounded icon pills */
+.btn-action {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  margin-left: 8px;
+  box-shadow: 0 10px 30px rgba(116, 96, 238, 0.08);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-action i { font-size: 16px; }
+.btn-action.view { background: #e6fcff; color: #07909a; }
+.btn-action.edit { background: #f3f0ff; color: #6f42c1; }
+.btn-action.delete { background: #7f5bd8; color: #fff; box-shadow: 0 12px 28px rgba(125,58,255,0.18); }
+.btn-action:hover { transform: translateY(-3px); }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table thead { display: none; }
+  .table tbody td { display: block; padding: 14px; }
+  .table tbody td.font-weight-bold { font-size: 18px; }
+}
+
+/* Make existing icon buttons match the trash (purple pill) theme */
+.btn-icon, .btn-action {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+}
+
+/* Apply purple pill theme to all small icon buttons used in lists */
+.btn-sm.btn-icon, .btn-action {
+  /* sizing and basic layout only - color handled per-action */
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  box-shadow: 0 8px 22px rgba(15, 7, 40, 0.04);
+}
+
+.btn-sm.btn-icon i, .btn-action i { font-size: 16px; }
+
+/* Color variants */
+.btn-action.view {
+  background: linear-gradient(135deg,#d1fbff 0%,#7ee8f5 100%);
+  color: #054047 !important;
+  box-shadow: 0 8px 20px rgba(6,144,164,0.08);
+}
+
+.btn-action.edit {
+  background: linear-gradient(135deg,#efe6ff 0%,#d6c1ff 100%);
+  color: #4b2a86 !important;
+  box-shadow: 0 8px 20px rgba(124,58,237,0.06);
+}
+
+.btn-action.delete {
+  background: linear-gradient(135deg,#7c3aed 0%,#6b21c8 100%);
+  color: #ffffff !important;
+  box-shadow: 0 10px 26px rgba(116, 96, 238, 0.14);
+}
+
+.btn-sm.btn-icon.btn-soft-purple, .btn-sm.btn-icon.btn-light-info {
+  /* reset modifiers so they don't clash with our action variants */
+  background: transparent;
+  color: inherit;
+}
+
+.btn-sm.btn-icon:hover, .btn-action:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(15,7,40,0.08);
+}

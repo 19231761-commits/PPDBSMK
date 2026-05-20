@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PendaftaranSantri;
+use App\Models\Pembayaransantri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -21,11 +22,8 @@ class PendaftaranSantriController extends Controller
     public function index()
     {
         $this->ensureAdmin();
-        $PendaftaranSantri = PendaftaranSantri::orderBy('nama_santri', 'desc')->paginate(10);
-        return view('backend.v_pendaftaransantri.index', [
-            'judul' => 'Pendaftaran Siswa',
-            'index' => $PendaftaranSantri,
-        ]);
+        // Redirect index to the per-jurusan management page so admin manages data there
+        return redirect('/backend/pendaftaran/kelola-per-jurusan');
     }
 
     public function pemilik()
@@ -41,19 +39,43 @@ class PendaftaranSantriController extends Controller
     public function kelolaPerJurusan()
     {
         $this->ensureAdmin();
-        
-        // Ambil semua data pendaftaran yang sudah diisi (memiliki pilihan jurusan)
-        $allPendaftaran = PendaftaranSantri::whereNotNull('pilihan_jurusan_1')
-                                           ->orderBy('pilihan_jurusan_1')
-                                           ->orderBy('nama_santri')
-                                           ->get();
-        
-        // Kelompokkan per jurusan berdasarkan pilihan_jurusan_1
-        $dataPerJurusan = $allPendaftaran->groupBy('pilihan_jurusan_1');
+        // Ambil semua data pendaftaran lalu lakukan filter & grouping di PHP.
+        // Ini menghindari query ke kolom yang mungkin belum ada pada DB (mis. pilihan_jurusan).
+        $allPendaftaran = PendaftaranSantri::orderBy('nama_santri')->get();
+
+        // Filter: hanya ambil baris yang memiliki setidaknya satu pilihan jurusan
+        $allPendaftaran = $allPendaftaran->filter(function($item) {
+            if (!empty($item->pilihan_jurusan)) return true;
+            foreach (['pilihan_jurusan_1','pilihan_jurusan_2','pilihan_jurusan_3','pilihan_jurusan_4','pilihan_jurusan_5'] as $col) {
+                if (!empty($item->{$col})) return true;
+            }
+            return false;
+        });
+
+        // Kelompokkan per jurusan menggunakan kolom `pilihan_jurusan` jika ada,
+        // jika tidak gunakan first non-empty dari pilihan_jurusan_1..5
+        $dataPerJurusan = $allPendaftaran->groupBy(function($item){
+            if (!empty($item->pilihan_jurusan)) return $item->pilihan_jurusan;
+            foreach (['pilihan_jurusan_1','pilihan_jurusan_2','pilihan_jurusan_3','pilihan_jurusan_4','pilihan_jurusan_5'] as $col) {
+                if (!empty($item->{$col})) return $item->{$col};
+            }
+            return 'Lainnya';
+        });
+
+        $totalPendaftar = $allPendaftaran->count();
+        $totalJurusan = $dataPerJurusan->count();
+        $jurusanTerfavorit = $dataPerJurusan->sortByDesc(fn ($siswa) => $siswa->count())->keys()->first();
+        $jurusanTerfavoritCount = $jurusanTerfavorit ? $dataPerJurusan[$jurusanTerfavorit]->count() : 0;
+        $totalPembayaran = (float) Pembayaransantri::sum('jumlah_pembayaran');
         
         return view('backend.v_pendaftaransantri.kelola_per_jurusan', [
             'judul' => 'Kelola Pendaftaran per Jurusan',
             'dataPerJurusan' => $dataPerJurusan,
+            'totalPendaftar' => $totalPendaftar,
+            'totalJurusan' => $totalJurusan,
+            'jurusanTerfavorit' => $jurusanTerfavorit,
+            'jurusanTerfavoritCount' => $jurusanTerfavoritCount,
+            'totalPembayaran' => $totalPembayaran,
         ]);
     }
 
@@ -174,6 +196,11 @@ class PendaftaranSantriController extends Controller
         $validatedData['ijazah_skl'] = $this->handleUpload($request, 'ijazah_skl');
         $validatedData['raport'] = $this->handleUpload($request, 'raport');
 
+        // Sync single-field pilihan_jurusan into pilihan_jurusan_1 for legacy storage
+        if (!empty($validatedData['pilihan_jurusan'])) {
+            $validatedData['pilihan_jurusan_1'] = $validatedData['pilihan_jurusan'];
+        }
+
         PendaftaranSantri::create($validatedData);
         if (Auth::check() && Auth::user()->role === 'admin_ppdb') {
             return redirect()->route('backend.pendaftaransantri.index')->with('success', 'Data berhasil tersimpan');
@@ -182,11 +209,7 @@ class PendaftaranSantriController extends Controller
         return redirect()->route('backend.pendaftaran.form')->with('success', 'Pendaftaran berhasil disimpan.');
     }
 
-//show
-    public function show(string $id)
-    {
-        //
-    }
+    //show (removed - use index page instead)
 
 //edit
     public function edit($id)
@@ -256,6 +279,11 @@ class PendaftaranSantriController extends Controller
         $validatedData['akta_kelahiran'] = $this->handleUpload($request, 'akta_kelahiran', $PendaftaranSantri->akta_kelahiran);
         $validatedData['ijazah_skl'] = $this->handleUpload($request, 'ijazah_skl', $PendaftaranSantri->ijazah_skl);
         $validatedData['raport'] = $this->handleUpload($request, 'raport', $PendaftaranSantri->raport);
+
+        // Sync single-field pilihan_jurusan into pilihan_jurusan_1 for legacy storage
+        if (!empty($validatedData['pilihan_jurusan'])) {
+            $validatedData['pilihan_jurusan_1'] = $validatedData['pilihan_jurusan'];
+        }
 
         $PendaftaranSantri->update($validatedData);
         return redirect()->route('backend.pendaftaransantri.index')->with('success', 'Data berhasil diperbaharui');

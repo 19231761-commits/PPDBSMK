@@ -14,6 +14,7 @@
     <link href="{{ asset('backend/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/dist/css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/dist/css/custom-dashboard.css') }}?v={{ filemtime(public_path('backend/dist/css/custom-dashboard.css')) }}" rel="stylesheet">
+    <link href="{{ asset('backend/dist/css/ui-overrides.css') }}?v={{ filemtime(public_path('backend/dist/css/ui-overrides.css')) }}" rel="stylesheet">
 </head>
 
 <body class="saas-dashboard dashboard-shell">

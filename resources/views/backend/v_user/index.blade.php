@@ -48,14 +48,17 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('backend.user.edit', $row->id) }}" class="btn btn-sm btn-purple mb-1" title="Ubah Data">
-                                                <i class="far fa-edit"></i> Ubah
+                                            <a href="{{ route('backend.user.edit', $row->id) }}" class="btn-action view" title="Lihat Data">
+                                                <i class="far fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('backend.user.edit', $row->id) }}" class="btn-action edit" title="Ubah Data">
+                                                <i class="far fa-edit"></i>
                                             </a>
                                             <form method="POST" action="{{ route('backend.user.destroy', $row->id) }}" class="d-inline-block">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm btn-danger show_confirm mb-1" data-konf-delete="{{ $row->name }}" title="Hapus Data">
-                                                    <i class="fas fa-trash"></i> Hapus
+                                                <button type="submit" class="btn-action delete show_confirm" data-konf-delete="{{ $row->name }}" title="Hapus Data">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>
